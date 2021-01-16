@@ -1,23 +1,27 @@
 import { all, fork, takeLatest, delay, put } from 'redux-saga/effects';
-import { TEST, TEST_SUCCESS, TEST_FAILURE } from '../reducers/user';
+import { 
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE 
+} from '../reducers/user';
 
-function* test() {
+function* login(action) {
   try {
     yield delay(1000);
     yield put({ //dispatch
-      type: TEST_SUCCESS,
+      type: LOGIN_SUCCESS,
+      data: action.data
     })
   } catch(err) {
     yield put({
-      type: TEST_FAILURE
+      type: LOGIN_FAILURE,
+      error: "비밀번호를 다시 입력해주세요."
     })
   }
 }
-function* watchTest() {
-  yield takeLatest(TEST, test);
+function* watchLogin() {
+  yield takeLatest(LOGIN_REQUEST, login);
 }
 export default function* userSaga() {
   yield all([
-    fork(watchTest),
+    fork(watchLogin),
   ])
 }

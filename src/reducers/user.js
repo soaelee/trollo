@@ -1,31 +1,38 @@
 import produce from 'immer';
 
 const initialState = {
-  user: "initial",
+  user: null,
 
   loginLoading: false,
   loginDone: false,
   loginError: null
 }
 
-export const TEST = 'TEST';
-export const TEST_SUCCESS = 'TEST_SUCCESS';
-export const TEST_FAILURE = 'TEST_FAILURE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const testRequestAction = () => ({
-  type: TEST
-});
-
+export const loginRequestAction = data => ({
+  type: LOGIN_REQUEST,
+  data,
+})
 const reducer = (state=initialState, action) => produce(state, (draft) => {
   switch(action.type){
-    case TEST:
-      draft.user = "ing";
+    case LOGIN_REQUEST:
+      draft.loginLoading = true;
+      draft.loginDone = false;
+      draft.loginError = null;
       break;
-    case TEST_SUCCESS:
-      draft.user = "trolls";
+    case LOGIN_SUCCESS:
+      draft.user = action.data;
+      draft.loginLoading = false;
+      draft.loginDone = true;
+      draft.loginError = null;
       break;
-    case TEST_FAILURE:
-      draft.user = "error";
+    case LOGIN_FAILURE:
+      draft.loginLoading = false;
+      draft.loginDone = false;
+      draft.loginError = action.error;
       break;
     default:
       return state;
