@@ -38,7 +38,7 @@ const Login = ({history}) => {
 
   useEffect(() => {
     if(loginDone) {
-      history.replace("/");
+      history.replace("/b");
     }
     if(loginError) {
       alert(loginError);

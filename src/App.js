@@ -3,8 +3,9 @@ import { Layout } from "antd";
 import styled from 'styled-components'
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/login';
-
+import Board from './pages/board';
 const { Header, Content } = Layout;
+
 const LayoutContainer = styled(Layout)`
   height: 100vh;
   width: 100vw;
@@ -25,6 +26,7 @@ function App() {
         <ContentContainer>
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route path="/b" component={Board} />
           </Switch>
         </ContentContainer>
       </LayoutContainer>
