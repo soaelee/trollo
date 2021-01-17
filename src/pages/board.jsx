@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/board/header';
-import List from '../components/board/list';
+import List from '../components/list/list';
 
 const Board = () => {
 
