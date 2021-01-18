@@ -1,5 +1,4 @@
 import React from 'react';
-import cardDetail from '../CardDetailComponent/cardDetail';
 import styles from './CardModalComponent.module.scss'
 
 export default function CardModalComponent({resetClick,ClckedNum}){
