@@ -44,8 +44,8 @@ const CardContent = ({card}) => {
   return (
     <Container>
       <div className="labelContainer">
-        {card.label && card.label.map(v => (
-          <Label color={v}/>
+        {card.label && card.label.map((v,idx) => (
+          <Label color={v} key={idx}/>
         ))}
       </div>
       <p>{card.title}</p>
@@ -57,8 +57,8 @@ const CardContent = ({card}) => {
           </DueDate>
         )}
         <Avatars>
-        {card.members.map(v => {
-          return <Avatar style={{marginLeft: 2}}>{v[0]}</Avatar>
+        {card.members.map((v,idx) => {
+          return <Avatar key={idx} style={{marginLeft: 2}}>{v[0]}</Avatar>
         })}
         </Avatars>
       </InfoContainer>
