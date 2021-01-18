@@ -26,7 +26,7 @@ const ListTitle = ({title}) => {
   }, [like]);
   return (
     <Container>
-      <Title title={title.value} onChange={title.onChange}/>
+      <Title title={title}/>
       <PopOverPos>
       
       { like ?

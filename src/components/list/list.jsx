@@ -24,27 +24,57 @@ const AddCard = styled(Button)`
     background-color: transparent;
   }
 `
-const List = ({title, idx}) => {
+
+const CardContainer = styled(Card)`
+  margin-bottom: .5em;
+  border-radius: 8px;
+`
+
+const CardCover = styled.div`
+  width: 100%;
+  height: 40px;
+  background-color: ${props => props.color};
+  border-radius: 8px;
+`;
+
+const List = ({list}) => {
   return (
-    <Draggable draggableId={title} index={parseInt(idx)}> 
+    <Draggable draggableId={list.title} index={parseInt(list.id)}> 
       {provided => (
         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-          <ListContainer title={<ListTitle title={title}/>}
+          <ListContainer title={<ListTitle title={list.title}/>}
             style={{position: 'relative'}}
             headStyle={{borderBottom: "0"}}
             bodyStyle={{padding: "10px"}}
           > 
           {/* Cards map zone */}
-            <Card 
-              id={'test'}
-              index={0}
-              key={'test'}
-              cover={<div style={{width: '100%', height: '40px', backgroundColor: 'tomato', borderRadius: 4}}></div>}
-              bodyStyle={{padding: "1.6px 8px"}}
-            >
-              <CardContent />
-            </Card>
-            {/* card가 존재하면 another card 아니면 card */}
+            {list.cards?.map( v => {
+              if(v.cover) {
+                const cover = v.cover;
+                console.log(cover);
+                return (
+                <CardContainer 
+                  id={v.id} 
+                  index={v.id} 
+                  key={v.id}
+                  bodyStyle={{padding: "1.6px 8px", paddingBottom: '20px'}}
+                  cover={<CardCover color={cover}/>}
+                >
+                  <CardContent card={v}/>
+                </CardContainer> 
+              )
+            } else {
+              return (
+                <CardContainer 
+                  id={v.id} 
+                  index={v.id} 
+                  key={v.id}
+                  bodyStyle={{padding: "1.6px 8px"}}
+                >
+                  <CardContent card={v}/>
+                </CardContainer> 
+              )
+            }})}
             <AddCard>+ Add another card</AddCard>
           </ListContainer>
           </div>

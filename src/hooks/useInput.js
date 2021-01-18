@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useInput = ({initialState, validator }) => {
+const useInput = (initialState, validator ) => {
   const [ value, setValue ] = useState(initialState);
 
   const onChange = (e) => {

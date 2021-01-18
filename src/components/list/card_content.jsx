@@ -19,6 +19,7 @@ const Label = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  position: relative;
 `
 const DueDate = styled.div`
   display: inline-block;
@@ -32,26 +33,34 @@ const DueDate = styled.div`
 const AvatarStyle = styled(Avatar)`
   display: inline-block;
   margin-right: 4px;
+  
 `;
-
-const CardContent = () => {
+const Avatars = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+`;
+const CardContent = ({card}) => {
   return (
     <Container>
       <div className="labelContainer">
-        <Label color="pink"/>
-        <Label color="orange"/>
+        {card.label && card.label.map(v => (
+          <Label color={v}/>
+        ))}
       </div>
-      <p>Test Card Layout</p>
+      <p>{card.title}</p>
       <InfoContainer>
-        <DueDate>
-          <ClockCircleOutlined style={{marginRight: '4px'}}/>
-          <span>Jan 18</span>
-        </DueDate>
-        <div className="avatars">
-          <AvatarStyle>P</AvatarStyle>
-          <AvatarStyle>H</AvatarStyle>
-          <AvatarStyle>L</AvatarStyle>
-        </div>
+        {card.date && (
+          <DueDate>
+            <ClockCircleOutlined style={{marginRight: '4px'}}/>
+            <span>{card.date}</span>
+          </DueDate>
+        )}
+        <Avatars>
+        {card.members.map(v => {
+          return <Avatar style={{marginLeft: 2}}>{v[0]}</Avatar>
+        })}
+        </Avatars>
       </InfoContainer>
     </Container>
   )

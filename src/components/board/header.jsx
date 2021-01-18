@@ -27,18 +27,26 @@ const Members = styled.div`
 const AvatarStyle = styled(Avatar)`
   margin: 0 1px;
 `
-const Header = () => {
+const Header = ({title, members, auth}) => {
   return (
     <Container>
-      <Btn style={{fontWeight: 'bold', fontSize: '1.3rem'}}>Troller</Btn>
+      <Btn style={{fontWeight: 'bold', fontSize: '1.3rem'}}>{title}</Btn>
       <Btn><HeartTwoTone /></Btn>
       <Members>
         {/* Avatar */}
-        <Badge dot>
-          <AvatarStyle>B</AvatarStyle>
-        </Badge>
-        <AvatarStyle>H</AvatarStyle>
-        <AvatarStyle>S</AvatarStyle>
+        {members.map( v  => {
+          if(auth === v) {
+            return (
+              <Badge dot key={v}>
+                <AvatarStyle>{v[0]}</AvatarStyle>
+              </Badge>
+            )
+          } else {
+            return (
+              <AvatarStyle key={v}>{v[0]}</AvatarStyle>
+            )
+          }
+        })}
       </Members>
       <Btn>Invite</Btn>
       <Btn><CaretDownOutlined /> Set Board</Btn>
