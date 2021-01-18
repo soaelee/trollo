@@ -27,6 +27,7 @@ const DueDate = styled.div`
   color: white;
   padding: .3em;
   font-size: 12px;
+  line-height: 2;
 `
 const AvatarStyle = styled(Avatar)`
   display: inline-block;

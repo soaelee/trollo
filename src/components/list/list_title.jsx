@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { EllipsisOutlined, HeartOutlined, HeartTwoTone} from '@ant-design/icons';
 import styled from 'styled-components';
-import { Popover, Input } from 'antd';
-import useInput from '../../hooks/useInput';
+import { Popover } from 'antd';
+import Title from '../common/title';
+
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -20,13 +21,12 @@ const PopOverPos = styled.div`
 const ListTitle = ({title}) => {
 
   const [ like, setLike ] = useState(false);
-  const titleInput = useInput(title);
   const onClickLikeBtn = useCallback(() => {
     setLike(!like);
   }, [like]);
   return (
     <Container>
-      <Input value={titleInput.value} onChange={titleInput.onChange}/>
+      <Title title={title.value} onChange={title.onChange}/>
       <PopOverPos>
       
       { like ?

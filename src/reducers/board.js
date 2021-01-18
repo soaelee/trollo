@@ -1,26 +1,29 @@
 import produce from 'immer';
+import boardDummyData from '../data/board';
 
-const dummyData = {
-  id: 1,
-  title: 'trollers_clone',
-  list: [
-    {
-      id: 1,
-      title: 'test list',
-      card: [
-        {
-          id: 1,
-          title: 'test card',
-          description: 'test description',
-          cover: 'tomato',
-          label: 'black, light-green',
-        },
-      ]
-    }
-  ]
-}
+// board data 구조
+// {
+//   id: 1,
+//   name: 'board_name',
+//   lists: [
+//     {
+//       id: 1,
+//       title: 'list_name',
+//       card: [
+//         {
+//           id: 1,
+//           title: 'card_name',
+//           description: '',
+//           cover: 'cover_color',
+//           label: ['label', 'colors'],
+//         },
+//       ]
+//     }
+//   ]
+// }
+
 const initialState = {
-  Lists: dummyData,
+  board: boardDummyData,
 
 }
 
