@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HeartTwoTone, CaretDownOutlined } from '@ant-design/icons';
-import { Avatar, Badge } from 'antd';
+import { Avatar, Badge, Button } from 'antd';
+import Title from '../common/title';
 const Container = styled.div`
   background: transparent;
   display: flex;
   align-items: center;
 `;
 
-const Btn = styled.button`
+const Btn = styled(Button)`
   background: rgba(255, 255, 255, 0.35);
   color: white;
   border: 0;
@@ -30,7 +31,9 @@ const AvatarStyle = styled(Avatar)`
 const Header = ({title, members, auth}) => {
   return (
     <Container>
-      <Btn style={{fontWeight: 'bold', fontSize: '1.3rem'}}>{title}</Btn>
+      <Btn>
+      <Title title={title} big={true}/>
+      </Btn>
       <Btn><HeartTwoTone /></Btn>
       <Members>
         {/* Avatar */}
