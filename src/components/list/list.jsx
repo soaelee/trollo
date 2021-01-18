@@ -56,43 +56,43 @@ const List = ({list}) => {
       <Draggable draggableId={list.title} index={parseInt(list.id)}> 
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <ListContainer title={<ListTitle title={list.title}/>}
+            <ListContainer title={<ListTitle title={list.title} id={list.id}/>}
               style={{position: 'relative'}}
               headStyle={{borderBottom: "0"}}
               bodyStyle={{padding: "10px"}}
             > 
-            {/* Cards map zone */}
-              {list.cards?.map( v => {
-                if(v.cover) {
-                  const cover = v.cover;
-                  console.log(cover);
-                  return (
-                      <CardContainer 
-                        key={v.id}
-                        id={v.id} 
-                        onClick={clickCard}
-                        index={v.id} 
-                        bodyStyle={{padding: "1.6px 8px", paddingBottom: '20px'}}
-                        cover={<CardCover color={cover}/>}
-                      >
-                        <CardContent card={v}/>
-                      </CardContainer> 
-                )
-              } else {
+            {list.cards?.map( v => {
+              if(v.cover) {
+                const cover = v.cover;
                 return (
-                  <CardContainer 
-                    key={v.id}
-                    id={v.id} 
-                    onClick={clickCard}
-                    index={v.id} 
-                    key={v.id}
-                    bodyStyle={{padding: "1.6px 8px"}}
-                  >
-                    <CardContent card={v}/>
-                  </CardContainer> 
+                    <CardContainer 
+                      key={v.id}
+                      id={v.id} 
+                      onClick={clickCard}
+                      index={v.id} 
+                      bodyStyle={{padding: "1.6px 8px", paddingBottom: '20px'}}
+                      cover={<CardCover color={cover}/>}
+                    >
+                      <CardContent card={v}/>
+                    </CardContainer> 
+              )
+            } else {
+              return (
+                <CardContainer 
+                  key={v.id}
+                  id={v.id} 
+                  onClick={clickCard}
+                  index={v.id} 
+                  key={v.id}
+                  bodyStyle={{padding: "1.6px 8px"}}
+                >
+                  <CardContent card={v}/>
+                </CardContainer> 
                 )
               }})}
-              <AddCard>+ Add another card</AddCard>
+              {list.cards ? (
+                <AddCard>+ Add another card</AddCard>
+              ) : <AddCard> + Add card</AddCard>}
             </ListContainer>
             </div>
         )

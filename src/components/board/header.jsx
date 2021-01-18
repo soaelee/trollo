@@ -32,7 +32,7 @@ const Header = ({title, members, auth}) => {
   return (
     <Container>
       <Btn>
-      <Title title={title} big={true}/>
+      <Title title={title} big={true} type="header"/>
       </Btn>
       <Btn><HeartTwoTone /></Btn>
       <Members>
