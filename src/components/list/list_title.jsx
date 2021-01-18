@@ -18,7 +18,7 @@ const PopOverPos = styled.div`
     background: transparent;
 `;
 
-const ListTitle = ({title}) => {
+const ListTitle = ({title, id}) => {
 
   const [ like, setLike ] = useState(false);
   const onClickLikeBtn = useCallback(() => {
@@ -26,7 +26,7 @@ const ListTitle = ({title}) => {
   }, [like]);
   return (
     <Container>
-      <Title title={title}/>
+      <Title title={title} type="list" id={id}/>
       <PopOverPos>
       
       { like ?

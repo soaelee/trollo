@@ -20,6 +20,7 @@ const ContentContainer = styled(Content)`
   flex: 1;
   width: 100%;
   max-width: 1054px;
+  position: relative;
 `
 function App() {
   
