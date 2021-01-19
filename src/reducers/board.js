@@ -6,7 +6,9 @@ import boardDummyData from '../data/board';
 //   id: 1,
 //   name: 'board_name',
 //   members: [],
+//   auth: 'board_creator'
 //   background: 'color',
+//   like: boolean
 //   lists: [
 //     {
 //       id: 1,
@@ -63,8 +65,10 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+export const addListRequestAction = () => ({
+  type: ADD_LIST_REQUEST,
+});
 // 편의상 배경 바꾸고, 좋아요누르는 액션을 동기로 진행하겠습니당
-
 export const editListTitleAction = (data) => ({
   type: EDIT_LIST_TITLE_REQUEST,
   data,
@@ -77,12 +81,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListDone = false;
       draft.addListError = null;
       break;
-    case ADD_LIST_SUCCESS:
+    case ADD_LIST_SUCCESS:{
+      const newId = draft.board.lists.length + 1;
       draft.addListLoading = false;
       draft.addListDone = true;
       draft.addListError = null;
-      draft.board.push(action.data);
+      draft.board.lists.push({id: newId, title: '', like: false});
       break;
+    }
     case ADD_LIST_FAILURE:
       draft.addListDone.Loading = false;
       draft.addListLoading = false;
