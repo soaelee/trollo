@@ -70,6 +70,11 @@ export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
 });
+
+export const removeListRequestAction = (data) => ({
+  type: REMOVE_LIST_REQUEST,
+  data
+})
 // 편의상 배경 바꾸고, 좋아요누르는 액션을 동기로 진행하겠습니당
 export const editListTitleAction = (data) => ({
   type: EDIT_LIST_TITLE_REQUEST,
@@ -109,7 +114,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.removeListLoading = false;
       draft.removeListDone = true;
       draft.removeListError = null;
-      draft.board = draft.board.lists.filter( v => v.id !== action.data);
+      draft.board.lists = draft.board.lists.filter( v => v.id !== action.data);
       break;
     case REMOVE_LIST_FAILURE:
       draft.removeListDone.Loading = false;
@@ -118,9 +123,8 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
-      // list.title = action.data.data;
+      list.title = action.data.data;
       console.log(action.data.id);
-      console.log(list);
       break;
     }
     default:
