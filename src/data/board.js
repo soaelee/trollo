@@ -64,11 +64,11 @@ const boardDummyData = {
           date: 'Fab, 28',
           members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae']
         },
-        // {
-        //   id: 1,
-        //   title: '기획',
-        // }
-      ]
+      ],
+    },
+    {
+      id: 3,
+      title: '최적화',
     }
   ]
 }

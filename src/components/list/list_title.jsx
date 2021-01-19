@@ -3,6 +3,9 @@ import { EllipsisOutlined, HeartOutlined, HeartTwoTone} from '@ant-design/icons'
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import Title from '../common/title';
+import { useDispatch } from 'react-redux';
+import { removeListRequestAction } from '../../reducers/board';
+
 
 const Container = styled.div`
   display: flex;
@@ -18,15 +21,19 @@ const PopOverPos = styled.div`
     background: transparent;
 `;
 
-const ListTitle = ({title}) => {
-
+const ListTitle = ({title, id}) => {
+  const dispatch = useDispatch();
   const [ like, setLike ] = useState(false);
   const onClickLikeBtn = useCallback(() => {
     setLike(!like);
   }, [like]);
+
+  const onClickRemoveList = useCallback(() => {
+    dispatch(removeListRequestAction(id));
+  }, []);
   return (
     <Container>
-      <Title title={title}/>
+      <Title title={title} type="list" id={id}/>
       <PopOverPos>
       
       { like ?
@@ -34,7 +41,11 @@ const ListTitle = ({title}) => {
       : <HeartOutlined style={{marginRight: 5}} onClick={onClickLikeBtn}/>
       }
       <Popover 
-        content="Delete list"
+        content={(
+          <div onClick={onClickRemoveList}>
+            Delete List
+          </div>
+        )}
         placement="right"
         overlayInnerStyle={{cursor: "pointer"}}
       >

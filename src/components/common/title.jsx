@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Input } from 'antd';
-import useInput from '../../hooks/useInput'
+import { useDispatch } from 'react-redux';
+import { editListTitleAction } from '../../reducers/board';
 const TitleInput = styled(Input)`
-  width: 80%;
+  display: inline-block;
   background: transparent;
   border: 0;
   outline: 0;
@@ -11,14 +12,36 @@ const TitleInput = styled(Input)`
   &:focus {
     background-color: white;
     border: 1px solid skyblue;
+    color: black;
   }
+  font-size: ${ props => props.big ? '1.3rem' : '1rem' };
+  color: ${props => props.big ? 'white' : 'black'};
+  width: ${props => props.big ? 'auto' : '80%'};
+  vertical-align: middle;
 `;
 
-// 여기서는 onChange가 아니라 title을 변경하는 dispatch가 필요로 함, 그러기 위해선 리스트 id도 받아오기
-const Title = ({title}) => {
-  const listTitle = useInput(title);
+// Enter누르면 focus 벗어나는거 추가 구현 필요
+const Title = ({title, big, type, id}) => {
+  const [ titleValue, setTitleValue ] = useState(title);
+  const dispatch = useDispatch();
+
+  const onChangeTitle = useCallback((e) => {
+    setTitleValue(e.target.value);
+    const body = {
+      id: parseInt(id),
+      data: e.target.value,
+    }
+    if(type === 'list') {
+      dispatch(editListTitleAction(body))
+    } else if (type === 'board'){
+      // editBoardTitleAction
+    } else if (type === 'card'){
+      // editCardTitleAction
+    }
+  }, [titleValue]);
+
   return (
-    <TitleInput value={listTitle.value} onChange={listTitle.onChange}/>
+    <TitleInput value={titleValue} onChange={onChangeTitle} big={big ? big : null} />
   )
 }
 
