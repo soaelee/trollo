@@ -5,19 +5,31 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import { addListRequestAction } from '../reducers/board';
 
 const AddListBtn = styled(Button)`
-  position: absolute;
-  top: 44px;
-  right: 10px;
+  position: relative;
+  top: 10px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: black;
 `;
 const Board = () => {
   
+  const dispatch = useDispatch();
+
   const { board } = useSelector((state) => state.board);
 
   const onDragEnd = useCallback(() => {
     console.log('Completed DnD!');
   }, []);
+
+  const onClickAddList = useCallback(() => {
+    dispatch(addListRequestAction());
+    // console.log(new Date());
+  }, []);
+
   return (
     <>
       <Navbar title={board.name} members={board.members} auth={board.auth}/>
@@ -29,10 +41,10 @@ const Board = () => {
                 <List key={v.id} list={v}/>
               ))}
               {provided.placeholder}
+              <AddListBtn type="primary" onClick={onClickAddList}>+ Add List</AddListBtn>
             </div>
           )}
         </Droppable>
-        <AddListBtn type="primary">+ Add List</AddListBtn>
       </DragDropContext>
     </>
   )

@@ -9,7 +9,6 @@ function* addList(action) {
     yield delay(1000);
     yield put({
       type: ADD_LIST_SUCCESS,
-      data: action.data
     })
   } catch (err) {
     yield delay(1000);

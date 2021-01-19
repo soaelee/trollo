@@ -1,12 +1,16 @@
 import produce from 'immer';
 import boardDummyData from '../data/board';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 // board data 구조
 // {
 //   id: 1,
 //   name: 'board_name',
 //   members: [],
+//   auth: 'board_creator'
 //   background: 'color',
+//   like: boolean
 //   lists: [
 //     {
 //       id: 1,
@@ -63,12 +67,19 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+export const addListRequestAction = () => ({
+  type: ADD_LIST_REQUEST,
+});
 // 편의상 배경 바꾸고, 좋아요누르는 액션을 동기로 진행하겠습니당
-
 export const editListTitleAction = (data) => ({
   type: EDIT_LIST_TITLE_REQUEST,
   data,
 });
+
+const getNewId = () => {
+  const newId = moment().format('YYYYMMDDHHmmss');
+  return parseInt(newId);
+}
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch(action.type){
@@ -77,12 +88,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListDone = false;
       draft.addListError = null;
       break;
-    case ADD_LIST_SUCCESS:
+    case ADD_LIST_SUCCESS:{
       draft.addListLoading = false;
       draft.addListDone = true;
       draft.addListError = null;
-      draft.board.push(action.data);
+      draft.board.lists.push({id: getNewId(), title: '', like: false});
       break;
+    }
     case ADD_LIST_FAILURE:
       draft.addListDone.Loading = false;
       draft.addListLoading = false;
@@ -106,8 +118,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
-      list.title = action.data.data;
-      // console.log(draft.lists);
+      // list.title = action.data.data;
+      console.log(action.data.id);
+      console.log(list);
       break;
     }
     default:

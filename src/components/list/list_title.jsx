@@ -3,6 +3,9 @@ import { EllipsisOutlined, HeartOutlined, HeartTwoTone} from '@ant-design/icons'
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import Title from '../common/title';
+import { useDispatch } from 'react-redux';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +27,11 @@ const ListTitle = ({title, id}) => {
   const onClickLikeBtn = useCallback(() => {
     setLike(!like);
   }, [like]);
+
+  const onClickRemoveList = useCallback(() => {
+    console.log('delete');
+    
+  }, []);
   return (
     <Container>
       <Title title={title} type="list" id={id}/>
@@ -34,7 +42,11 @@ const ListTitle = ({title, id}) => {
       : <HeartOutlined style={{marginRight: 5}} onClick={onClickLikeBtn}/>
       }
       <Popover 
-        content="Delete list"
+        content={(
+          <div onClick={onClickRemoveList}>
+            Delete List
+          </div>
+        )}
         placement="right"
         overlayInnerStyle={{cursor: "pointer"}}
       >
