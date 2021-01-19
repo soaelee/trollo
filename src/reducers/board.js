@@ -48,6 +48,9 @@ const initialState = {
   addCardDone: false,
   addCardError: null,
 
+  inviteLoading: false,
+  inviteDone: false,
+  inviteError: null,
   // 배경바꾸기와 좋아요와 타이틀바꾸기는 saga거치지 않고 바로
 
 }
@@ -66,7 +69,9 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
-
+export const INVITE_REQUEST = 'INVITE_REQUEST';
+export const INVITE_SUCCESS = 'INVITE_SUCCESS';
+export const INVITE_FAILURE = 'INVITE_FAILURE';
 
 
 export const addListRequestAction = () => ({
@@ -88,6 +93,10 @@ export const editListTitleAction = (data) => ({
   data,
 });
 
+export const inviteRequestAction = (data) => ({
+  type: INVITE_REQUEST,
+  data,
+})
 const getNewId = () => {
   const newId = moment().format('YYYYMMDDHHmmss');
   return parseInt(newId);
@@ -145,6 +154,23 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         draft.addCardDone.Loading = false;
         draft.addCardLoading = false;
         draft.addCardError = action.error;
+        break;
+    case INVITE_REQUEST:
+      draft.inviteLoading = true;
+      draft.inviteDone = false;
+      draft.inviteError = null;
+      break;
+    case INVITE_SUCCESS:{
+      draft.inviteLoading = false;
+      draft.inviteDone = true;
+      draft.inviteError = null;
+      draft.board.members.push(action.data);
+      break;
+    }
+    case INVITE_FAILURE:
+        draft.inviteDone.Loading = false;
+        draft.inviteLoading = false;
+        draft.inviteError = action.error;
         break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);

@@ -5,7 +5,7 @@ const initialState = {
 
   loginLoading: false,
   loginDone: false,
-  loginError: null
+  loginError: null,
 }
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -14,16 +14,28 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+export const LIKE_LIST_REQUEST = 'LIKE_LIST_REQUEST';
+export const UNLIKE_LIST_REQUEST = 'UNLIKE_LIST_REQUEST';
 
 export const loginRequestAction = data => ({
   type: LOGIN_REQUEST,
   data,
-})
+});
 
 export const logoutRequestAction = data => ({
   type: LOGOUT_REQUEST,
   data,
-})
+});
+
+export const likeListRequestAction = data => ({
+  type: LIKE_LIST_REQUEST,
+  data,
+});
+
+export const unlikeListRequestAction = data => ({
+  type: UNLIKE_LIST_REQUEST,
+  data,
+});
 
 const reducer = (state=initialState, action) => produce(state, (draft) => {
   switch(action.type){
@@ -33,7 +45,7 @@ const reducer = (state=initialState, action) => produce(state, (draft) => {
       draft.loginError = null;
       break;
     case LOGIN_SUCCESS:
-      draft.user = action.data;
+      draft.user = {name: action.data, like: []};
       draft.loginLoading = false;
       draft.loginDone = true;
       draft.loginError = null;
@@ -59,6 +71,13 @@ const reducer = (state=initialState, action) => produce(state, (draft) => {
       draft.loginDone = false;
       draft.loginError = action.error;
       break;
+    case LIKE_LIST_REQUEST:
+      draft.user.like.push(action.data);
+      break;
+    case UNLIKE_LIST_REQUEST:{
+      draft.user.like = draft.user.like.filter(v => v !== action.data);
+      break;
+    }
     default:
       return state;
   }

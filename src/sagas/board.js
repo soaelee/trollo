@@ -3,6 +3,7 @@ import {
   ADD_LIST_REQUEST, ADD_LIST_SUCCESS, ADD_LIST_FAILURE,
   REMOVE_LIST_REQUEST, REMOVE_LIST_SUCCESS, REMOVE_LIST_FAILURE, 
   ADD_CARD_REQUEST, ADD_CARD_SUCCESS, ADD_CARD_FAILURE,
+  INVITE_REQUEST, INVITE_SUCCESS, INVITE_FAILURE,
 } from '../reducers/board';
 
 function* addList(action) {
@@ -52,19 +53,42 @@ function* addCard(action) {
   }
 }
 
+function* invite(action){
+  try{
+    yield delay(1000);
+    yield put({
+      type: INVITE_SUCCESS,
+      data: action.data
+    })
+  }catch(err){
+    yield delay(1000);
+    yield put({
+      type: INVITE_FAILURE,
+      error: action.err
+    })
+  }
+}
+
 function* watchRemoveList() {
   yield takeLatest(REMOVE_LIST_REQUEST, removeList);
 }
+
 function* watchAddList() {
   yield takeLatest(ADD_LIST_REQUEST, addList)
 }
+
 function* watchAddCard() {
   yield takeLatest(ADD_CARD_REQUEST, addCard)
+}
+
+function* watchInvite() {
+  yield takeLatest(INVITE_REQUEST, invite)
 }
 export default function* boardSaga() {
   yield all([
     fork(watchAddList),
     fork(watchRemoveList),
     fork(watchAddCard),
+    fork(watchInvite),
   ])
 }
