@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/login';
 import Board from './pages/board';
+import Header from './components/header/header'
 import { DragDropContext } from 'react-beautiful-dnd';
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 const LayoutContainer = styled(Layout)`
   height: 100vh;
@@ -25,7 +26,7 @@ function App() {
   
   return (
     <LayoutContainer>
-      <Header>Header</Header>
+      <Header/>
       <ContentContainer>
         <Switch>
           <Route exact path="/" component={Login} />

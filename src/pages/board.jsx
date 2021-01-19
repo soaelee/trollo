@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import Header from '../components/board/header';
+import Navbar from '../components/board/navbar';
 import List from '../components/list/list';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ const Board = () => {
   }, []);
   return (
     <>
-    <Header title={board.name} members={board.members} auth={board.auth}/>
+    <Navbar title={board.name} members={board.members} auth={board.auth}/>
     <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId={board.name} direction="horizontal">
         {provided => (

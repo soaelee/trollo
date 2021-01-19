@@ -28,13 +28,15 @@ const Members = styled.div`
 const AvatarStyle = styled(Avatar)`
   margin: 0 1px;
 `
-const Header = ({title, members, auth}) => {
+const Navbar = ({title, members, auth}) => {
   return (
     <Container>
       <Btn>
-      <Title title={title} big={true}/>
+        <Title title={title} big={true}/>
       </Btn>
-      <Btn><HeartTwoTone /></Btn>
+      <Btn>
+        <HeartTwoTone />
+      </Btn>
       <Members>
         {/* Avatar */}
         {members.map( v  => {
@@ -57,4 +59,4 @@ const Header = ({title, members, auth}) => {
   )
 }
 
-export default Header
+export default Navbar
