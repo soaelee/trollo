@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={loginDone ? styles.header1 : styles.header2}>
       <div className={styles.logo}>
         <img src="./imgs/logo.png" alt="Logo" />
       </div>

@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Board from './pages/board';
 import Header from './components/header/header'
 import { DragDropContext } from 'react-beautiful-dnd';
+import { useSelector } from 'react-redux';
 const { Content } = Layout;
 
 const LayoutContainer = styled(Layout)`
@@ -16,6 +17,8 @@ const LayoutContainer = styled(Layout)`
   align-items: center;
   padding: 0 50px;
   overflow-x: scroll;
+  background-color: ${props => props.bgColor ? "#3C69A3" : "#fff" }
+  
 `
 const ContentContainer = styled(Content)`
   flex: 1;
@@ -23,10 +26,12 @@ const ContentContainer = styled(Content)`
   margin-top: 100px;
   position: relative;
 `
+
 function App() {
+  const {loginDone} = useSelector(state => state.user)
   
   return (
-    <LayoutContainer>
+    <LayoutContainer bgColor={loginDone}>
       <Header/>
       <ContentContainer>
         <Switch>
