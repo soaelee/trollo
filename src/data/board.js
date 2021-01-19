@@ -68,6 +68,7 @@ const boardDummyData = {
     {
       id: 3,
       title: '최적화',
+      cards: []
     }
   ]
 }
