@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, CheckSquareOutlined, MinusSquareOutlined } from '@ant-design/icons';
 import colors from '../../data/colors';
-
+import { Button } from 'antd';
 const Container = styled.div`
   width: 250px;
   border-radius: 8px;
@@ -29,14 +29,14 @@ const Colors = styled.div`
 `;
 
 const Color = styled.div`
-  width: 100%;
+  width: 85%;
   height: 30px;
   background: ${ props => props.color};
   margin-bottom: 6px;
   border-radius: 3px;
 `
 
-const Labels = () => {
+const Labels = ({labels}) => {
   return (
     <Container>
       <Title>
@@ -44,10 +44,26 @@ const Labels = () => {
         <CloseOutlined style={{position: 'absolute', right: 10, color: 'gray'}}/>
       </Title>
       <Colors>
-        { colors.map(v => 
-          <Color color={v} />
-        )}
+        { colors.map(v => {
+          if(labels.includes(v)){
+            return (
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                <Color color={v} />
+                <CheckSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
+              </div>
+
+            )
+          } else {
+            return (
+              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                <Color color={v} />
+                <MinusSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
+            </div>
+            )
+          }
+        })}
       </Colors>
+      <Button style={{marginTop: '1rem'}}>Selected Labels</Button>
     </Container>
   )
 }
