@@ -55,12 +55,15 @@ function* addCard(action) {
 function* watchRemoveList() {
   yield takeLatest(REMOVE_LIST_REQUEST, removeList);
 }
+
 function* watchAddList() {
   yield takeLatest(ADD_LIST_REQUEST, addList)
 }
+
 function* watchAddCard() {
   yield takeLatest(ADD_CARD_REQUEST, addCard)
 }
+
 export default function* boardSaga() {
   yield all([
     fork(watchAddList),
