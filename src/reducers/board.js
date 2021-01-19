@@ -32,58 +32,6 @@ import 'moment/locale/ko';
 
 const initialState = {
   board: boardDummyData,
-
-  addListLoading: false,
-  addListDone: false,
-  addListError: null,
-
-  removeListLoading: false,
-  removeListDone: false,
-  removeListError: null,
-
-  editListTitleLoading: false,
-  editListTitleDone: false,
-  editListTitleError: null,
-
-  addCardLoading: false,
-  addCardDone: false,
-  addCardError: null,
-
-  // 배경바꾸기와 좋아요와 타이틀바꾸기는 saga거치지 않고 바로
-
-}
-
-export const ADD_LIST_REQUEST = 'ADD_LIST_REQUEST';
-export const ADD_LIST_SUCCESS = 'ADD_LIST_SUCCESS';
-export const ADD_LIST_FAILURE = 'ADD_LIST_FAILURE';
-
-export const REMOVE_LIST_REQUEST = 'REMOVE_LIST_REQUEST';
-export const REMOVE_LIST_SUCCESS = 'REMOVE_LIST_SUCCESS';
-export const REMOVE_LIST_FAILURE = 'REMOVE_LIST_FAILURE';
-
-export const EDIT_LIST_TITLE_REQUEST = 'EDIT_LIST_TITLE_REQUEST';
-
-export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
-export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
-export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
-
-export const addListRequestAction = () => ({
-  type: ADD_LIST_REQUEST,
-});
-
-export const removeListRequestAction = (data) => ({
-  type: REMOVE_LIST_REQUEST,
-  data
-})
-// 편의상 배경 바꾸고, 좋아요누르는 액션을 동기로 진행하겠습니당
-export const editListTitleAction = (data) => ({
-  type: EDIT_LIST_TITLE_REQUEST,
-  data,
-});
-
-const getNewId = () => {
-  const newId = moment().format('YYYYMMDDHHmmss');
-  return parseInt(newId);
 }
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {

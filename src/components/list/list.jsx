@@ -61,33 +61,33 @@ const List = ({list}) => {
               headStyle={{borderBottom: "0"}}
               bodyStyle={{padding: "10px"}}
             > 
-            {list.cards?.map( v => {
-              if(v.cover) {
-                const cover = v.cover;
+            {/* Cards map zone */}
+              {list.cards?.map( v => {
+                if(v.cover) {
+                  const cover = v.cover;
+                  return (
+                      <CardContainer 
+                        key={v.id}
+                        id={v.id} 
+                        onClick={clickCard}
+                        index={v.id} 
+                        bodyStyle={{padding: "1.6px 8px", paddingBottom: '20px'}}
+                        cover={<CardCover color={cover}/>}
+                      >
+                        <CardContent card={v}/>
+                      </CardContainer> 
+                )
+              } else {
                 return (
-                    <CardContainer 
-                      key={v.id}
-                      id={v.id} 
-                      onClick={clickCard}
-                      index={v.id} 
-                      bodyStyle={{padding: "1.6px 8px", paddingBottom: '20px'}}
-                      cover={<CardCover color={cover}/>}
-                    >
-                      <CardContent card={v}/>
-                    </CardContainer> 
-              )
-            } else {
-              return (
-                <CardContainer 
-                  key={v.id}
-                  id={v.id} 
-                  onClick={clickCard}
-                  index={v.id} 
-                  key={v.id}
-                  bodyStyle={{padding: "1.6px 8px"}}
-                >
-                  <CardContent card={v}/>
-                </CardContainer> 
+                  <CardContainer 
+                    key={v.id}
+                    id={v.id} 
+                    onClick={clickCard}
+                    index={v.id} 
+                    bodyStyle={{padding: "1.6px 8px"}}
+                  >
+                    <CardContent card={v}/>
+                  </CardContainer> 
                 )
               }})}
               {list.cards ? (
