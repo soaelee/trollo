@@ -1,5 +1,7 @@
 import produce from 'immer';
 import boardDummyData from '../data/board';
+import moment from 'moment';
+import 'moment/locale/ko';
 
 // board data 구조
 // {
@@ -74,6 +76,11 @@ export const editListTitleAction = (data) => ({
   data,
 });
 
+const getNewId = () => {
+  const newId = moment().format('YYYYMMDDHHmmss');
+  return parseInt(newId);
+}
+
 const reducer = (state = initialState, action) => produce(state, (draft) => {
   switch(action.type){
     case ADD_LIST_REQUEST:
@@ -82,11 +89,10 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListError = null;
       break;
     case ADD_LIST_SUCCESS:{
-      const newId = draft.board.lists.length + 1;
       draft.addListLoading = false;
       draft.addListDone = true;
       draft.addListError = null;
-      draft.board.lists.push({id: newId, title: '', like: false});
+      draft.board.lists.push({id: getNewId(), title: '', like: false});
       break;
     }
     case ADD_LIST_FAILURE:
@@ -112,8 +118,9 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
-      list.title = action.data.data;
-      // console.log(draft.lists);
+      // list.title = action.data.data;
+      console.log(action.data.id);
+      console.log(list);
       break;
     }
     default:

@@ -27,8 +27,9 @@ const Board = () => {
 
   const onClickAddList = useCallback(() => {
     dispatch(addListRequestAction());
+    // console.log(new Date());
   }, []);
-  
+
   return (
     <>
       <Navbar title={board.name} members={board.members} auth={board.auth}/>
