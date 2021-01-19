@@ -1,3 +1,4 @@
+  
 import React, { useCallback } from 'react';
 import Navbar from '../components/board/navbar';
 import List from '../components/list/list';
@@ -48,5 +49,4 @@ const Board = () => {
     </>
   )
 }
-
 export default Board

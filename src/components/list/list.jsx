@@ -5,6 +5,8 @@ import ListTitle from './list_title';
 import CardContent from './card_content';
 import { Draggable } from 'react-beautiful-dnd';
 import CardDetailPage from '../../pages/cardDtail';
+import { useDispatch } from 'react-redux';
+import { addCardRequestAction } from '../../reducers/board';
 
 const ListContainer = styled(Card)`
   width: 300px;
@@ -38,7 +40,8 @@ const CardCover = styled.div`
   border-radius: 8px;
 `;
 
-const List = ({list}) => {
+const List = ({list, index}) => {
+  const dispatch = useDispatch();
   const [isClcked,setIsClick] = useState(false);
   const [ClckedNum,setClickNum] = useState(null);
   const resetClick = ()=>{
@@ -51,9 +54,12 @@ const List = ({list}) => {
     setIsClick(()=>true)
     setClickNum(()=>id)
   }
+  const onClickAddCard = () => {
+    dispatch(addCardRequestAction(list.id));
+  };
   return (
     <>
-      <Draggable draggableId={list.title} index={parseInt(list.id)}> 
+      <Draggable draggableId={list.title} index={parseInt(index)}> 
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <ListContainer title={<ListTitle title={list.title} id={list.id}/>}
@@ -90,9 +96,9 @@ const List = ({list}) => {
                   </CardContainer> 
                 )
               }})}
-              {list.cards ? (
-                <AddCard>+ Add another card</AddCard>
-              ) : <AddCard> + Add card</AddCard>}
+              {list.cards.length >= 1 ? (
+                <AddCard onClick={onClickAddCard}>+ Add another card</AddCard>
+              ) : <AddCard onClick={onClickAddCard}> + Add card</AddCard>}
             </ListContainer>
             </div>
         )
