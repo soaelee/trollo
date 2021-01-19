@@ -11,7 +11,7 @@ export default function ModalMiniComponent({type,members,labels,datas}){
               {color}
             </div>)):
           members.map(member=>(
-            <div>
+            <div key={member}>
               {member[0]}
             </div>
           ))

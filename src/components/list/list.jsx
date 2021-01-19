@@ -65,7 +65,6 @@ const List = ({list}) => {
               {list.cards?.map( v => {
                 if(v.cover) {
                   const cover = v.cover;
-                  console.log(cover);
                   return (
                       <CardContainer 
                         key={v.id}

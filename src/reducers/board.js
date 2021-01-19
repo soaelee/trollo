@@ -24,7 +24,6 @@ import boardDummyData from '../data/board';
 
 const initialState = {
   board: boardDummyData,
-
 }
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
