@@ -5,40 +5,39 @@ import { logoutRequestAction } from '../../reducers/user';
 import styles from './header.module.css';
 
 const Header = () => {
+  const { user, loginDone, loginError } = useSelector((state) => state.user);
 
-  const { board } = useSelector((state) => state.board);
-  const members = board.members;
-  const { loginDone, loginError } = useSelector( state => state.user)
-  
   useEffect(() => {
-    if(!loginDone) {
-      history.replace('/')
+    if (!loginDone) {
+      history.replace('/');
     }
-    if(loginError) {
-      alert(loginError)
+    if (loginError) {
+      alert(loginError);
     }
   }, [loginDone, loginError]);
-  
-  
+
   let history = useHistory();
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    dispatch(logoutRequestAction())
+    dispatch(logoutRequestAction());
     history.push('/');
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-          <img src="./imgs/logo.png" alt="Logo" />
+        <img src="./imgs/logo.png" alt="Logo" />
       </div>
-      <div className={styles.buttons}>
-        <button className={styles.memberBtn}>{members[0].charAt(0)}</button>
-        <button className={styles.logoutBtn} onClick={onLogout}>
-          <img src="./imgs/logout.png" alt="Logout image" />
-        </button>
-      </div>
+      {/* 로그인 후 user버튼, 로그아웃 버튼 보여줌 */}
+      {loginDone && (
+        <div className={styles.buttons}>
+          <button className={styles.memberBtn}>{user && user.slice(0, 1).toUpperCase()}</button>
+          <button className={styles.logoutBtn} onClick={onLogout}>
+            <img src="./imgs/logout.png" alt="Logout image" />
+          </button>
+        </div>
+      )}
     </header>
   );
 };
