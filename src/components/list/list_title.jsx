@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Popover } from 'antd';
 import Title from '../common/title';
 import { useDispatch } from 'react-redux';
-import moment from 'moment';
-import 'moment/locale/ko';
+import { removeListRequestAction } from '../../reducers/board';
+
 
 const Container = styled.div`
   display: flex;
@@ -22,15 +22,14 @@ const PopOverPos = styled.div`
 `;
 
 const ListTitle = ({title, id}) => {
-
+  const dispatch = useDispatch();
   const [ like, setLike ] = useState(false);
   const onClickLikeBtn = useCallback(() => {
     setLike(!like);
   }, [like]);
 
   const onClickRemoveList = useCallback(() => {
-    console.log('delete');
-    
+    dispatch(removeListRequestAction(id));
   }, []);
   return (
     <Container>
