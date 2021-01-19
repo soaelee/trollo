@@ -2,14 +2,10 @@ import React, { useCallback } from 'react';
 import Navbar from '../components/board/navbar';
 import List from '../components/list/list';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-<<<<<<< HEAD
-import { useSelector } from 'react-redux';
-=======
 import { useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { addListRequestAction } from '../reducers/board';
->>>>>>> 7800b733b34ae71f51c18007ea633a0b9de59469
 
 const AddListBtn = styled(Button)`
   position: relative;
@@ -31,7 +27,6 @@ const Board = () => {
 
   const onClickAddList = useCallback(() => {
     dispatch(addListRequestAction());
-    // console.log(new Date());
   }, []);
 
   return (
