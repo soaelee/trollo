@@ -20,7 +20,7 @@ const Board = () => {
   }, []);
   return (
     <>
-      <Header title={board.name} members={board.members} auth={board.auth}/>
+      <Navbar title={board.name} members={board.members} auth={board.auth}/>
       <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId={board.name} direction="horizontal">
           {provided => (

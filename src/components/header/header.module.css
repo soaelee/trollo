@@ -8,7 +8,7 @@
   background-color: #99B2D1;
 }
 
-.logo > a > img{
+.logo > img{
   width: 100px;
 }
 
@@ -16,7 +16,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 40%;
+  width: 47%;
   padding: 0 3%;
 }
 
