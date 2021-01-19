@@ -3,11 +3,11 @@ const boardDummyData = {
   name: 'trollers_clone',
   members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae'],
   auth: 'Back Seung Il',
+  like: [],
   lists: [
     {
       id: 1,
       title: '기획',
-      like: false,
       cards: [
         {
           id: 1,
@@ -38,7 +38,6 @@ const boardDummyData = {
     {
       id: 2,
       title: '구현 및 테스트',
-      like: true,
       cards: [
         {
           id: 4,
