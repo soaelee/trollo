@@ -1,3 +1,4 @@
+  
 import React, { useCallback } from 'react';
 import Navbar from '../components/board/navbar';
 import List from '../components/list/list';
@@ -27,7 +28,6 @@ const Board = () => {
 
   const onClickAddList = useCallback(() => {
     dispatch(addListRequestAction());
-    // console.log(new Date());
   }, []);
 
   return (
@@ -49,5 +49,4 @@ const Board = () => {
     </>
   )
 }
-
 export default Board

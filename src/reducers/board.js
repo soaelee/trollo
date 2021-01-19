@@ -10,7 +10,6 @@ import 'moment/locale/ko';
 //   members: [],
 //   auth: 'board_creator'
 //   background: 'color',
-//   like: boolean
 //   lists: [
 //     {
 //       id: 1,
@@ -67,14 +66,22 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+
+
+
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
 });
 
 export const removeListRequestAction = (data) => ({
   type: REMOVE_LIST_REQUEST,
-  data
-})
+  data,
+});
+
+export const addCardRequestAction = (data) => ({
+  type: ADD_CARD_REQUEST,
+  data,
+}) 
 // 편의상 배경 바꾸고, 좋아요누르는 액션을 동기로 진행하겠습니당
 export const editListTitleAction = (data) => ({
   type: EDIT_LIST_TITLE_REQUEST,
@@ -97,7 +104,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListLoading = false;
       draft.addListDone = true;
       draft.addListError = null;
-      draft.board.lists.push({id: getNewId(), title: '', like: false});
+      draft.board.lists.push({id: getNewId(), title: '', like: false, cards: []});
       break;
     }
     case ADD_LIST_FAILURE:
@@ -121,6 +128,24 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.removeListLoading = false;
       draft.removeListError = action.error;
       break;
+    case ADD_CARD_REQUEST:
+      draft.addCardLoading = true;
+      draft.addCardDone = false;
+      draft.addCardError = null;
+      break;
+    case ADD_CARD_SUCCESS:{
+      const list = draft.board.lists.find( v => v.id === action.data);
+      draft.addCardLoading = false;
+      draft.addCardDone = true;
+      draft.addCardError = null;
+      list.cards.push({id: getNewId(), title: ''});
+      break;
+    }
+    case ADD_CARD_FAILURE:
+        draft.addCardDone.Loading = false;
+        draft.addCardLoading = false;
+        draft.addCardError = action.error;
+        break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
       list.title = action.data.data;
