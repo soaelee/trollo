@@ -48,7 +48,11 @@ const CardContent = ({card}) => {
           <Label color={v} key={idx}/>
         ))}
       </div>
+      {card.title ?
       <p>{card.title}</p>
+      :
+      <p>카드이름을 입력해주세요</p>
+      }
       <InfoContainer>
         {card.date && (
           <DueDate>
@@ -57,7 +61,7 @@ const CardContent = ({card}) => {
           </DueDate>
         )}
         <Avatars>
-        {card.members.map((v,idx) => {
+        {card.members?.map((v,idx) => {
           return <Avatar key={idx} style={{marginLeft: 2}}>{v[0]}</Avatar>
         })}
         </Avatars>

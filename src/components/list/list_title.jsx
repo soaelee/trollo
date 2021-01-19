@@ -24,13 +24,14 @@ const PopOverPos = styled.div`
 const ListTitle = ({title, id}) => {
   const dispatch = useDispatch();
   const [ like, setLike ] = useState(false);
+  
   const onClickLikeBtn = useCallback(() => {
     setLike(!like);
   }, [like]);
 
-  const onClickRemoveList = useCallback(() => {
+  const onClickRemoveList = () => {
     dispatch(removeListRequestAction(id));
-  }, []);
+  };
   return (
     <Container>
       <Title title={title} type="list" id={id}/>
