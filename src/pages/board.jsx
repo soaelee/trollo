@@ -1,3 +1,4 @@
+  
 import React, { useCallback } from 'react';
 import Navbar from '../components/board/navbar';
 import List from '../components/list/list';
@@ -6,10 +7,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { addListRequestAction } from '../reducers/board';
-import Labels from '../components/common/labels';
 
-// DnD 해결해야해요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// 관심관심!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 const AddListBtn = styled(Button)`
   position: relative;
   top: 10px;
@@ -24,15 +22,13 @@ const Board = () => {
 
   const { board } = useSelector((state) => state.board);
 
-  const onDragEnd = () => {
-    // 여기서 인덱스를 바꿔주어야 하나 생각중,,,,,,,
-    // 흙흙 너무 어렵다
+  const onDragEnd = useCallback(() => {
     console.log('Completed DnD!');
-  };
+  }, []);
 
-  const onClickAddList = () => {
+  const onClickAddList = useCallback(() => {
     dispatch(addListRequestAction());
-  };
+  }, []);
 
   return (
     <>
@@ -41,18 +37,16 @@ const Board = () => {
           <Droppable droppableId={board.name} direction="horizontal">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef} style={{display: 'flex'}}>
-              {board.lists.map((v, index) => (
-                <List key={v.id} list={v} index={index}/>
+              {board.lists.map(v => (
+                <List key={v.id} list={v}/>
               ))}
               {provided.placeholder}
               <AddListBtn type="primary" onClick={onClickAddList}>+ Add List</AddListBtn>
             </div>
           )}
         </Droppable>
-        <Labels />
       </DragDropContext>
     </>
   )
 }
-
 export default Board
