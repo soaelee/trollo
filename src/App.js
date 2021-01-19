@@ -14,13 +14,13 @@ const LayoutContainer = styled(Layout)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  padding: 0 50px;
   overflow-x: scroll;
 `
 const ContentContainer = styled(Content)`
   flex: 1;
   width: 100%;
-  max-width: 1054px;
+  margin-top: 100px;
   position: relative;
 `
 function App() {
