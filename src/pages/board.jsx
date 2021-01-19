@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Header from '../components/board/header';
 import List from '../components/list/list';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Board = () => {
   

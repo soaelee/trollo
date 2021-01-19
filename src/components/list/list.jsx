@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'antd';
 import styled from 'styled-components';
 import ListTitle from './list_title';
@@ -85,7 +85,6 @@ const List = ({list}) => {
                     id={v.id} 
                     onClick={clickCard}
                     index={v.id} 
-                    key={v.id}
                     bodyStyle={{padding: "1.6px 8px"}}
                   >
                     <CardContent card={v}/>
