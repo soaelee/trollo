@@ -36,36 +36,37 @@ const Color = styled.div`
   border-radius: 3px;
 `
 
-const Labels = ({labels}) => {
+const Backgrounds = ({cover}) => {
   return (
     <Container>
       <Title>
-        <p style={{margin: 0}}>Labels</p>
+        <p style={{margin: 0}}>Background</p>
         <CloseOutlined style={{position: 'absolute', right: 10, color: 'gray'}}/>
       </Title>
       <Colors>
         { colors.map(v => {
-          if(labels.includes(v)){
+          if(cover === v){
             return (
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
                 <Color color={v} />
                 <CheckSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
               </div>
-
             )
-          } else {
+          }
+          else {
             return (
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
                 <Color color={v} />
                 <MinusSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
-            </div>
-            )
+              </div>
+            )            
           }
-        })}
+        }
+        )}
       </Colors>
-      <Button style={{marginTop: '1rem'}}>Selected Labels</Button>
+      <Button style={{marginTop: '1rem'}}>Selected Background</Button>
     </Container>
   )
 }
 
-export default Labels;
+export default Backgrounds;

@@ -7,7 +7,6 @@ import { useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import { addListRequestAction } from '../reducers/board';
-
 const AddListBtn = styled(Button)`
   position: relative;
   top: 10px;
