@@ -89,7 +89,10 @@ const boardDummyData = {
         id: 7,
         title: 'TodoList',
         description: 'To do List',
-        date: 'Jan, 28',
+        date: {
+          value: 'Fab, 28',
+          checked: false,
+        },
       }
       ]
     }
