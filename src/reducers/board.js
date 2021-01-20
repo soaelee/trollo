@@ -202,10 +202,12 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     }
     case CHANGE_LIST_INDEX: {
-      const destination = draft.board.lists[action.data.destIdx];
-      const source = draft.board.lists[action.data.srcIdx];
-      draft.board.lists[action.data.destIdx] = source;
-      draft.board.lists[action.data.srcIdx] = destination;
+      const destIdx = action.data.destIdx;
+      const srcIdx = action.data.srcIdx;
+      
+      const source = draft.board.lists[srcIdx];
+      draft.board.lists.splice(srcIdx, 1);
+      draft.board.lists.splice(destIdx, 0, source);
       break;
     }
     case EDIT_CARD_REQUEST:{
