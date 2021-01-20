@@ -45,7 +45,7 @@ const Login = ({history}) => {
     };
     return {res: true};
   };
-  
+
   const id = useInput("", idValidator);
   const password = useInput("", passwordValidator);
   
@@ -55,8 +55,9 @@ const Login = ({history}) => {
     if(!id.value) return alert('아이디를 입력해주세요.');
     if(!password.value) return alert('비밀번호를 입력해주세요.');
     dispatch(loginRequestAction(id.value));
-    history.push('/');
+    history.replace('/');
   };
+
   const { loginLoading, loginDone, loginError } = useSelector( state => state.user);
 
   useEffect(() => {
