@@ -40,6 +40,24 @@ const Input = styled.input`
   margin-right: 5px;
   outline: none;
 `
+
+const TitleInput = styled.input`
+display: inline-block;
+background: transparent;
+border: 0;
+outline: 0;
+border-radius: 4px;
+&:focus {
+  background-color: white;
+  border: 1px solid skyblue;
+  color: black;
+}
+font-size: ${ props => props.big ? '1.1rem' : '1rem' };
+font-weight: ${ props => props.big ? 'bolder': 'normal'};
+color: ${props => props.big ? 'white' : 'black'};
+width: ${props => props.big ? 'auto' : '80%'};
+vertical-align: middle;
+`
 const Navbar = ({ title, members, auth }) => {
   
   const dispatch = useDispatch();
@@ -62,10 +80,16 @@ const Navbar = ({ title, members, auth }) => {
     setIsVisibleBg(false);
   };
 
+  const onChangeTitle = () => {
+
+  }
+  
+  // const TitleInput = 
+
   return (
     <Container>
       <Btn>
-        <Title title={title} big={true} />
+        <Title onChange={onChangeTitle} title={title} big={true} />
       </Btn>
       <Members>
         {/* Avatar */}

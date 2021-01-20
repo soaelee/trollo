@@ -51,11 +51,13 @@ const List = ({list, index}) => {
     setIsClick(()=>false)
     setClickNum(()=>null)
   }
+
   const clickCard = (e)=>{
     const id = e.currentTarget.id
     setIsClick(()=>true)
     setClickNum(()=>id)
   }
+  
   const onClickAddCard = () => {
     dispatch(addCardRequestAction(list.id));
   };
