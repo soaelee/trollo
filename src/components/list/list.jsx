@@ -7,6 +7,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import CardDetailPage from '../../pages/cardDtail';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCardRequestAction } from '../../reducers/board';
+import PropTypes from 'prop-types';
 
 const ListContainer = styled(Card)`
   width: 300px;
@@ -40,7 +41,15 @@ const CardCover = styled.div`
   border-radius: 8px;
 `;
 
+// Prop Types
+List.propTypes = {
+  list: PropTypes.arrayof(propTypes.number),
+  index: PropTypes.number,
+}
+
 const List = ({list, index}) => {
+  console.log(list)
+  console.log(index)
   const dispatch = useDispatch();
   const [isClcked,setIsClick] = useState(false);
   const [ClckedNum,setClickNum] = useState(null);
@@ -110,5 +119,7 @@ const List = ({list, index}) => {
     </>
   )
 }
+
+
 
 export default List

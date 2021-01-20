@@ -14,7 +14,10 @@ const boardDummyData = {
           title: '주제선정',
           cover: '#000080',
           label: ['#000000', '#000080'],
-          date: 'Jan,14',
+          date: {
+            value: 'Jan, 14',
+            checked: true,
+          },
           members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae']
         },
         {
@@ -22,7 +25,10 @@ const boardDummyData = {
           title: '기능정의',
           description: '트렐로 기능 정리 후, 구현 가능한 기능 추리기',
           label: ['#000000', '#ADFF2F'],
-          date: 'Jan, 18',
+          date: {
+            value: 'Jan, 18',
+            checked: true,
+          },
           members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae']
         },
         {
@@ -30,7 +36,10 @@ const boardDummyData = {
           title: 'UI설계',
           description: 'Figma by 승일',
           label: ['#000000', '#20B2AA'],
-          date: 'Jan, 28',
+          date: {
+            value: 'Jan, 28',
+            checked: false,
+          },
           members: ['Back Seung Il']
         },
       ]
@@ -45,7 +54,11 @@ const boardDummyData = {
           description: 'redux로 간단하게 (검증X)',
           cover: '#708090',
           label: ['#FFFF00'],
-          date: 'Fab, 4',
+          date: {
+            value: 'Fab, 4',
+            checked: false,
+          },
+          
           members: ['Lee So Ae']
         },
         {
@@ -60,7 +73,10 @@ const boardDummyData = {
           title: 'DnD 테스트 및 적용',
           description: 'react-beautiful-dnd 라이브러리 사용',
           label: ['#FFFF00', '#000080'],
-          date: 'Fab, 28',
+          date: {
+            value: 'Fab, 28',
+            checked: false,
+          },
           members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae']
         },
       ],
@@ -68,7 +84,13 @@ const boardDummyData = {
     {
       id: 3,
       title: '최적화',
-      cards: []
+      cards: [{
+        id: 7,
+        title: 'TodoList',
+        description: 'To do List',
+        date: 'Jan, 28',
+      }
+      ]
     }
   ]
 }

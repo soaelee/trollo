@@ -6,7 +6,7 @@ import Title from '../common/title';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeListRequestAction } from '../../reducers/board';
 import { likeListRequestAction, unlikeListRequestAction } from '../../reducers/user';
-
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
 display: flex;
@@ -21,6 +21,14 @@ const PopOverPos = styled.div`
   border: 0;
   background: transparent;
 `;
+
+// Prop Types
+ListTitle.propTypes = {
+  title: PropTypes.string,
+  id: PropTypes.string,
+  likes: PropTypes.arrayof(PropTypes.number),
+}
+
 const ListTitle = ({title, id, likes}) => {
 const dispatch = useDispatch();
 const onClickLikeBtn = () => {
@@ -56,4 +64,5 @@ return (
   </Container>
 )
 }
+
 export default ListTitle
