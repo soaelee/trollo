@@ -22,13 +22,6 @@ const PopOverPos = styled.div`
   background: transparent;
 `;
 
-// Prop Types
-ListTitle.propTypes = {
-  title: PropTypes.string,
-  id: PropTypes.string,
-  likes: PropTypes.arrayof(PropTypes.number),
-}
-
 const ListTitle = ({title, id, likes}) => {
 const dispatch = useDispatch();
 const onClickLikeBtn = () => {
@@ -63,6 +56,13 @@ return (
     </PopOverPos>
   </Container>
 )
+}
+
+// Prop Types
+ListTitle.propTypes = {
+  title: PropTypes.string,
+  id: PropTypes.string,
+  likes: PropTypes.arrayof(PropTypes.number),
 }
 
 export default ListTitle

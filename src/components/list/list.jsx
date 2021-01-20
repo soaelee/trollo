@@ -41,15 +41,7 @@ const CardCover = styled.div`
   border-radius: 8px;
 `;
 
-// Prop Types
-List.propTypes = {
-  list: PropTypes.arrayof(propTypes.number),
-  index: PropTypes.number,
-}
-
 const List = ({list, index}) => {
-  console.log(list)
-  console.log(index)
   const dispatch = useDispatch();
   const [isClcked,setIsClick] = useState(false);
   const [ClckedNum,setClickNum] = useState(null);
@@ -60,7 +52,6 @@ const List = ({list, index}) => {
     setClickNum(()=>null)
   }
   const clickCard = (e)=>{
-    console.log(e.currentTarget.id)
     const id = e.currentTarget.id
     setIsClick(()=>true)
     setClickNum(()=>id)
@@ -120,6 +111,10 @@ const List = ({list, index}) => {
   )
 }
 
-
+// Prop Types
+List.propTypes = {
+  list: PropTypes.arrayof(propTypes.number),
+  index: PropTypes.number,
+}
 
 export default List
