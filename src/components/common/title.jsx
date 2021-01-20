@@ -14,7 +14,8 @@ const TitleInput = styled(Input)`
     border: 1px solid skyblue;
     color: black;
   }
-  font-size: ${ props => props.big ? '1.3rem' : '1rem' };
+  font-size: ${ props => props.big ? '1.1rem' : '1rem' };
+  font-weight: ${ props => props.big ? 'bolder': 'normal'};
   color: ${props => props.big ? 'white' : 'black'};
   width: ${props => props.big ? 'auto' : '80%'};
   vertical-align: middle;

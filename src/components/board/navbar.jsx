@@ -21,7 +21,7 @@ const Btn = styled(Button)`
   outline: 0;
   border-radius: 3px;
   padding: 0.3em 0.8em;
-  height: 35px;
+  height: 45px;
   margin: 0 0.5em;
   line-height: 1;
 `;
@@ -66,9 +66,6 @@ const Navbar = ({ title, members, auth }) => {
     <Container>
       <Btn>
         <Title title={title} big={true} />
-      </Btn>
-      <Btn>
-        <HeartTwoTone />
       </Btn>
       <Members>
         {/* Avatar */}
