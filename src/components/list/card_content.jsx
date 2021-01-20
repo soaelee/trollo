@@ -23,17 +23,14 @@ const InfoContainer = styled.div`
 `;
 const DueDate = styled.div`
   display: inline-block;
-  background: #fa9988;
+  background: ${props => props.color ? 'yellow': '#fa9988'};
   border-radius: 4px;
   color: white;
   padding: 0.3em;
   font-size: 12px;
   line-height: 2;
 `;
-const AvatarStyle = styled(Avatar)`
-  display: inline-block;
-  margin-right: 4px;
-`;
+
 const Avatars = styled.div`
   flex: 1;
   display: flex;
@@ -48,7 +45,7 @@ const CardContent = ({ card }) => {
       {card.title ? <p>{card.title}</p> : <p>카드이름을 입력해주세요</p>}
       <InfoContainer>
         {card.date && (
-          <DueDate>
+          <DueDate color={card.date.checked}>
             <ClockCircleOutlined style={{ marginRight: '4px' }} />
             <span>{card.date.value}</span>
           </DueDate>
