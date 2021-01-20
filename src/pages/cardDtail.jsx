@@ -2,9 +2,9 @@ import React from "react";
 import CardModalComponent from "../components/modal/CardModalComponent";
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { editCardInfoAction } from "../reducers/board";
 
 export default function CardDetailPage({resetClick,ClckedNum}){
-  const dispatch = useDispatch();
   const cardData = useSelector(state=>state.board.board.lists);
 
   // const setDescription = 
@@ -16,6 +16,11 @@ export default function CardDetailPage({resetClick,ClckedNum}){
       clickedCardData = clickedCard[0]
       return
     };
-  })
-  return ReactDOM.createPortal(<CardModalComponent clickedCardData={clickedCardData} resetClick={resetClick}/>,document.getElementById("cardModal"))
+  });
+
+  const dispatch = useDispatch();
+  const editInfo = (editTarget,data)=>{
+    dispatch(editCardInfoAction({ClckedNum,editTarget,data}))
+  }
+  return ReactDOM.createPortal(<CardModalComponent editInfo={editInfo} clickedCardData={clickedCardData} resetClick={resetClick}/>,document.getElementById("cardModal"))
 }
