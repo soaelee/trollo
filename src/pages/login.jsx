@@ -28,11 +28,35 @@ const Title = styled.h2`
   color: #5e6c84;
 `;
 const Login = ({history}) => {
+  
+  const idValidator = (value) => {
+    if(/^\s+$/.test(value)) {
+      return {res: false, err: '공백은 입력할 수 없습니다.'};
+    };
+    if(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(value)) {
+      return {res: false, err: '영문+숫자만 입력할 수 있습니다.'}
+    };
+    return {res: true};
+  }; 
 
-  const email = useInput("");
-  const password = useInput("");
+  const passwordValidator = (value) => {
+    if(/^\s+$/.test(value)) {
+      return {res: false, err: '공백은 입력할 수 없습니다.'};
+    };
+    return {res: true};
+  };
 
+  const id = useInput("", idValidator);
+  const password = useInput("", passwordValidator);
+  
   const dispatch = useDispatch();
+  
+  const onLogin = () => {
+    if(!id.value) return alert('아이디를 입력해주세요.');
+    if(!password.value) return alert('비밀번호를 입력해주세요.');
+    dispatch(loginRequestAction(id.value));
+    history.replace('/');
+  };
 
   const { loginLoading, loginDone, loginError } = useSelector( state => state.user);
 
@@ -45,10 +69,6 @@ const Login = ({history}) => {
     }
   }, [loginDone, loginError]);
 
-  const onLogin = useCallback(() => {
-    dispatch(loginRequestAction(email.value));
-    history.push('/');
-  }, [email.value, password.value]);
 
   return (
     <FormContainer onFinish={onLogin}>
@@ -56,8 +76,7 @@ const Login = ({history}) => {
       <InputStyle
         placeholder="input email" 
         prefix={<UserOutlined />} 
-        value={email.value}
-        onChange={email.onChange}  
+        {...id} 
       />
       <InputStyle
         type="password"
