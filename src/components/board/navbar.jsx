@@ -1,10 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { HeartTwoTone, CaretDownOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Button } from 'antd';
 import Title from '../common/title';
-import { useDispatch } from 'react-redux';
-import {inviteRequestAction } from '../../reducers/board';
+import { useSelector, useDispatch } from 'react-redux';
+import { inviteRequestAction, changeBoardBgAction } from '../../reducers/board';
+import Backgrounds from '../common/backgrounds';
+import { Popover } from 'antd';
 
 const Container = styled.div`
   background: transparent;
@@ -41,13 +43,23 @@ const Input = styled.input`
 const Navbar = ({ title, members, auth }) => {
   
   const dispatch = useDispatch();
+  const { background } = useSelector(state => state.board.board);
   const inputEl = useRef(null);
+  const [ isVisibleBg, setIsVisibleBg ] = useState(false);
 
   const inviteMember = (e) => {
     e.stopPropagation();
     const member = inputEl.current.value;
     if(member.length > 0)
     dispatch(inviteRequestAction(member.toUpperCase()));
+  };
+  
+  const onClickChangeBg = () => {
+    setIsVisibleBg(!isVisibleBg);
+  };
+
+  const onCloseChangeBg = () => {
+    setIsVisibleBg(false);
   };
 
   return (
@@ -80,9 +92,16 @@ const Navbar = ({ title, members, auth }) => {
           placeholder="invite members..." />
         Invite
       </Btn>
-      <Btn>
-        <CaretDownOutlined /> Set Board
+      <Popover
+        content={<Backgrounds cover={background}  onCloseSetBoard={onCloseChangeBg} action={changeBoardBgAction}/>}
+        trigger="click"
+        visible={isVisibleBg}
+        onVisibleChange={() => {setIsVisibleBg(!isVisibleBg)}}
+      >
+      <Btn onClick={onClickChangeBg}>
+        <CaretDownOutlined/> Set Board
       </Btn>
+      </Popover>
     </Container>
   );
 };

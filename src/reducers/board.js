@@ -78,6 +78,8 @@ export const INVITE_FAILURE = 'INVITE_FAILURE';
 
 export const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
 
+export const CHANGE_BOARD_BACKGROUND = 'CHANGE_BOARD_BACKGROUND';
+
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
 });
@@ -102,14 +104,20 @@ export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
   ClckedNum,
   editTarget,
   data
-})
+});
+
 export const inviteRequestAction = (data) => ({
   type: INVITE_REQUEST,
   data,
-})
+});
 
 export const changeListIndexAction = (data) => ({
   type: CHANGE_LIST_INDEX,
+  data,
+});
+
+export const changeBoardBgAction = (data) => ({
+  type: CHANGE_BOARD_BACKGROUND,
   data,
 })
 
@@ -163,7 +171,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addCardLoading = false;
       draft.addCardDone = true;
       draft.addCardError = null;
-      list.cards.push({id: getNewId(), title: ''});
+      list.cards.push({id: getNewId(), title: '', description: ''});
       break;
     }
     case ADD_CARD_FAILURE:
@@ -208,8 +216,11 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
           return
         };
       })
-      break
+      break;
     }
+    case CHANGE_BOARD_BACKGROUND:
+      draft.board.background = action.data;
+      break;
     default:
       break;
   }
