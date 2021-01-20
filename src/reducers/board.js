@@ -61,7 +61,7 @@ export const ADD_LIST_FAILURE = 'ADD_LIST_FAILURE';
 
 export const REMOVE_LIST_REQUEST = 'REMOVE_LIST_REQUEST';
 export const REMOVE_LIST_SUCCESS = 'REMOVE_LIST_SUCCESS';
-export const REMOVE_LIST_FAILURE = 'REMOVE_LIST_FAILURE';
+export const REMOVE_LIST_FAILURE = 'REMOVE_LIST_FAIㅏLURE';
 
 export const EDIT_LIST_TITLE_REQUEST = 'EDIT_LIST_TITLE_REQUEST';
 
@@ -77,6 +77,8 @@ export const INVITE_SUCCESS = 'INVITE_SUCCESS';
 export const INVITE_FAILURE = 'INVITE_FAILURE';
 
 export const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
+
+export const CHANGE_BOARD_BACKGROUND = 'CHANGE_BOARD_BACKGROUND';
 
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
@@ -102,14 +104,20 @@ export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
   ClckedNum,
   editTarget,
   data
-})
+});
+
 export const inviteRequestAction = (data) => ({
   type: INVITE_REQUEST,
   data,
-})
+});
 
 export const changeListIndexAction = (data) => ({
   type: CHANGE_LIST_INDEX,
+  data,
+});
+
+export const changeBoardBgAction = (data) => ({
+  type: CHANGE_BOARD_BACKGROUND,
   data,
 })
 
@@ -163,7 +171,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addCardLoading = false;
       draft.addCardDone = true;
       draft.addCardError = null;
-      list.cards.push({id: getNewId(), title: ''});
+      list.cards.push({id: getNewId(), title: '', description: ''});
       break;
     }
     case ADD_CARD_FAILURE:
@@ -205,12 +213,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
         if(selectedcard){
           selectedcard[action.editTarget]=action.data;
-          console.log(selectedcard[action.editTarget])
           return
         };
-      });
-      break
+      })
+      break;
     }
+    case CHANGE_BOARD_BACKGROUND:
+      draft.board.background = action.data;
+      break;
     default:
       break;
   }
