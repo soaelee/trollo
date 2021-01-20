@@ -4,6 +4,7 @@ const boardDummyData = {
   members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae'],
   auth: 'Back Seung Il',
   like: [null],
+  background: '#3C69A3',
   lists: [
     {
       id: 1,

@@ -17,21 +17,21 @@ const LayoutContainer = styled(Layout)`
   align-items: center;
   padding: 0 50px;
   overflow-x: scroll;
-  background-color: ${props => props.bgColor ? "#3C69A3" : "#fff" }
-  
+  background-color: ${props => props.isColor ? props.bgColor : "#fff"};
 `
+
 const ContentContainer = styled(Content)`
   flex: 1;
   width: 100%;
   margin-top: 70px;
   position: relative;
-`
+`;
 
 function App() {
   const {loginDone} = useSelector(state => state.user)
-  
+  const { background } = useSelector(state => state.board.board);
   return (
-    <LayoutContainer bgColor={loginDone}>
+    <LayoutContainer isColor={loginDone} bgColor={background}>
       <Header/>
       <ContentContainer>
         <Switch>
