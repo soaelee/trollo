@@ -21,7 +21,7 @@ const Header = () => {
 
   const onLogout = () => {
     dispatch(logoutRequestAction());
-    history.push('/');
+    history.replace('/');
   };
 
   return (
@@ -32,7 +32,7 @@ const Header = () => {
       {/* 로그인 후 user버튼, 로그아웃 버튼 보여줌 */}
       {loginDone && (
         <div className={styles.buttons}>
-          <button className={styles.memberBtn}>{user && user.slice(0, 1).toUpperCase()}</button>
+          <button className={styles.memberBtn}>{user && user.name.slice(0, 1).toUpperCase()}</button>
           <button className={styles.logoutBtn} onClick={onLogout}>
             <img src="./imgs/logout.png" alt="Logout image" />
           </button>

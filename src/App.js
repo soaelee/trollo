@@ -23,7 +23,7 @@ const LayoutContainer = styled(Layout)`
 const ContentContainer = styled(Content)`
   flex: 1;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 70px;
   position: relative;
 `
 

@@ -3,8 +3,9 @@ import { EllipsisOutlined, HeartOutlined, HeartTwoTone} from '@ant-design/icons'
 import styled from 'styled-components';
 import { Popover } from 'antd';
 import Title from '../common/title';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeListRequestAction } from '../../reducers/board';
+import { likeListRequestAction, unlikeListRequestAction } from '../../reducers/user';
 
 
 const Container = styled.div`
@@ -23,11 +24,18 @@ const PopOverPos = styled.div`
 
 const ListTitle = ({title, id}) => {
   const dispatch = useDispatch();
-  const [ like, setLike ] = useState(false);
-  
-  const onClickLikeBtn = useCallback(() => {
-    setLike(!like);
-  }, [like]);
+
+  const likes = useSelector(state => state.user)
+  console.log(likes.user.like)
+  const likedBoards = likes.user.like
+  console.log(likedBoards)
+  const onClickLikeBtn = () => {
+    if(likedBoards.includes(id)){
+      dispatch(unlikeListRequestAction(id)) 
+    } else {
+      dispatch(likeListRequestAction(id))
+    }
+  };
 
   const onClickRemoveList = () => {
     dispatch(removeListRequestAction(id));
@@ -37,7 +45,7 @@ const ListTitle = ({title, id}) => {
       <Title title={title} type="list" id={id}/>
       <PopOverPos>
       
-      { like ?
+      { likedBoards.includes(id) ?
       <HeartTwoTone style={{marginRight: 5}} onClick={onClickLikeBtn}/> 
       : <HeartOutlined style={{marginRight: 5}} onClick={onClickLikeBtn}/>
       }

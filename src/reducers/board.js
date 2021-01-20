@@ -48,6 +48,9 @@ const initialState = {
   addCardDone: false,
   addCardError: null,
 
+  inviteLoading: false,
+  inviteDone: false,
+  inviteError: null,
   // 배경바꾸기와 좋아요와 타이틀바꾸기는 saga거치지 않고 바로
 
 }
@@ -66,11 +69,17 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+<<<<<<< HEAD
 export const EDIT_CARD_REQUEST = "EDIT_CARD_REQUEST";
 export const EDIT_CARD_SUCCESS = "EDIT_CARD_SUCCESS";
 export const EDIT_CARD_FAIL = "EDIT_CARD_FAIL";
+=======
+export const INVITE_REQUEST = 'INVITE_REQUEST';
+export const INVITE_SUCCESS = 'INVITE_SUCCESS';
+export const INVITE_FAILURE = 'INVITE_FAILURE';
+>>>>>>> 202fe89d7eb51bbee9d448692a118bd026e0f472
 
-
+export const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
 
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
@@ -96,6 +105,15 @@ export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
   ClckedNum,
   editTarget,
   data
+})
+export const inviteRequestAction = (data) => ({
+  type: INVITE_REQUEST,
+  data,
+})
+
+export const changeListIndexAction = (data) => ({
+  type: CHANGE_LIST_INDEX,
+  data,
 })
 
 const getNewId = () => {
@@ -156,11 +174,29 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         draft.addCardLoading = false;
         draft.addCardError = action.error;
         break;
+    case INVITE_REQUEST:
+      draft.inviteLoading = true;
+      draft.inviteDone = false;
+      draft.inviteError = null;
+      break;
+    case INVITE_SUCCESS:{
+      draft.inviteLoading = false;
+      draft.inviteDone = true;
+      draft.inviteError = null;
+      draft.board.members.push(action.data);
+      break;
+    }
+    case INVITE_FAILURE:
+        draft.inviteDone.Loading = false;
+        draft.inviteLoading = false;
+        draft.inviteError = action.error;
+        break;
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
       list.title = action.data.data;
       break;
     }
+<<<<<<< HEAD
     case EDIT_CARD_REQUEST:{
       draft.board.lists.forEach(list=>{
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
@@ -170,6 +206,14 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         };
       })
       break
+=======
+    case CHANGE_LIST_INDEX: {
+      const destination = draft.board.lists[action.data.destIdx];
+      const source = draft.board.lists[action.data.srcIdx];
+      draft.board.lists[action.data.destIdx] = source;
+      draft.board.lists[action.data.srcIdx] = destination;
+      break;
+>>>>>>> 202fe89d7eb51bbee9d448692a118bd026e0f472
     }
     default:
       break;
