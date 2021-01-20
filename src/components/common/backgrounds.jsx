@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { CloseOutlined, CheckSquareOutlined, MinusSquareOutlined } from '@ant-design/icons';
 import colors from '../../data/colors';
 import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
+
 const Container = styled.div`
   width: 250px;
   border-radius: 8px;
@@ -34,37 +36,47 @@ const Color = styled.div`
   background: ${ props => props.color};
   margin-bottom: 6px;
   border-radius: 3px;
+  &:hover {
+    width: 90%;
+  }
+
 `
 
-const Backgrounds = ({cover}) => {
+const Backgrounds = ({cover, onCloseSetBoard, action}) => {
+  const dispatch = useDispatch();
+  const onClose = () => {
+    onCloseSetBoard();
+  };
+
+  const onChangeBg = (color) => {
+    dispatch(action(color));
+  };
   return (
     <Container>
       <Title>
         <p style={{margin: 0}}>Background</p>
-        <CloseOutlined style={{position: 'absolute', right: 10, color: 'gray'}}/>
+        <CloseOutlined onClick={onClose} style={{position: 'absolute', right: 10, color: 'gray', cursor: 'pointer'}}/>
       </Title>
       <Colors>
         { colors.map(v => {
           if(cover === v){
             return (
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-                <Color color={v} />
-                <CheckSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
+                <Color color={v} onClick={() => {onChangeBg(v)}}/>
               </div>
             )
           }
           else {
             return (
               <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
-                <Color color={v} />
-                <MinusSquareOutlined style={{fontSize: '1.3rem', color: 'gray'}}/>
+                <Color color={v} onClick={() => {onChangeBg(v)}} />
               </div>
             )            
           }
         }
         )}
       </Colors>
-      <Button style={{marginTop: '1rem'}}>Selected Background</Button>
+      <Button style={{marginTop: '1rem'}} onClick={onCloseSetBoard}>Done</Button>
     </Container>
   )
 }

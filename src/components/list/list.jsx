@@ -5,8 +5,9 @@ import ListTitle from './list_title';
 import CardContent from './card_content';
 import { Draggable } from 'react-beautiful-dnd';
 import CardDetailPage from '../../pages/cardDtail';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCardRequestAction } from '../../reducers/board';
+import PropTypes from 'prop-types';
 
 const ListContainer = styled(Card)`
   width: 300px;
@@ -44,12 +45,13 @@ const List = ({list, index}) => {
   const dispatch = useDispatch();
   const [isClcked,setIsClick] = useState(false);
   const [ClckedNum,setClickNum] = useState(null);
+  const likes = useSelector(state => state.user.user?.like);
+
   const resetClick = ()=>{
     setIsClick(()=>false)
     setClickNum(()=>null)
   }
   const clickCard = (e)=>{
-    console.log(e.currentTarget.id)
     const id = e.currentTarget.id
     setIsClick(()=>true)
     setClickNum(()=>id)
@@ -62,7 +64,7 @@ const List = ({list, index}) => {
       <Draggable draggableId={String(list.id)} index={parseInt(index)}> 
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <ListContainer title={<ListTitle title={list.title} id={list.id}/>}
+            <ListContainer title={<ListTitle title={list.title} id={list.id} likes={likes}/>}
               style={{position: 'relative'}}
               headStyle={{borderBottom: "0"}}
               bodyStyle={{padding: "10px"}}
@@ -109,4 +111,13 @@ const List = ({list, index}) => {
   )
 }
 
+// Prop Types
+List.propTypes = {
+  list: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    cards: PropTypes.array,
+  }),
+  index: PropTypes.number,
+}
 export default List
