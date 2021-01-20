@@ -19,6 +19,7 @@ const boardDummyData = {
             value: 'Jan, 14',
             checked: true,
           },
+          description:"",
           members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae']
         },
         {

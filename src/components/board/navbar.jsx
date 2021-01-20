@@ -22,7 +22,7 @@ const Btn = styled(Button)`
   border-radius: 3px;
   padding: 0.3em 0.8em;
   height: 45px;
-  margin: 0 0.5em;
+  margin-right: 10px;
   line-height: 1;
 `;
 const Members = styled.div`
@@ -31,7 +31,7 @@ const Members = styled.div`
 `;
 
 const AvatarStyle = styled(Avatar)`
-  margin: 0 1px;
+  margin-right: 5px;
 `;
 
 const Input = styled.input`

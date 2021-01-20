@@ -4,13 +4,14 @@ import { AlignLeftOutlined, CreditCardOutlined } from '@ant-design/icons';
 import "./CardModalComponent.css"
 import { Input } from 'antd';
 import ModalMiniComponent from '../modalMiniComoponent/modalMiniComponent';
+import DateComponent from '../modalMiniComoponent/modalMiniDateComponent';
 const { TextArea } = Input;
 export default function CardModalComponent({resetClick,clickedCardData,editInfo}){
   const [activeItem,setActiveItem] = useState("none")
   const [isEditing,setIsEditing] = useState(false);
   const [titleData,setTitleData] = useState(clickedCardData.title);
-  const [descData,setDescData] = useState(clickedCardData.description);
-  const titleInput = useRef(null);
+  const [descData,setDescData] = useState(clickedCardData.description?clickedCardData.description:"");
+  console.log(clickedCardData)
   return(
     <div className={styles.modalBox}>
       <section className={styles.modalSection}>
@@ -28,8 +29,8 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
               <CreditCardOutlined/>
             </div>
             <TextArea 
-              ref={titleInput}
-              value={clickedCardData.title?titleData:"제목을 입력해주세요"} 
+              value={clickedCardData.title?titleData:""} 
+              placeholder="제목을 입력해주세요"
               style={{
                 resize:'none',
                 boxShadow:activeItem==="title"?"1px blue":"0",
@@ -57,7 +58,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
             <div className={styles.cardInfo}>
               {clickedCardData.members && <ModalMiniComponent type="members" members={clickedCardData.members} datas={["B"]}/>}
               {clickedCardData.label && <ModalMiniComponent type="labels" labels={clickedCardData.label} datas={["yellow","red"]}/>}
-              {clickedCardData.date && <ModalMiniComponent type="labels" labels={clickedCardData.label} datas={["yellow","red"]}/>}
+              {clickedCardData.date && <DateComponent editInfo={editInfo} date={clickedCardData.date}/>}
             </div>
             <div className={styles.descrition}>
               <h3>
@@ -84,10 +85,10 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
                     setActiveItem(state=>state==="desc"?"none":"desc");
                   }
                 }
-                onChange={
-                  e=>{
+                onChange={e=>{
                     setDescData(()=>e.target.value);
-                    editInfo("descrition",e.target.value)
+                    console.log(descData)
+                    editInfo("description",e.target.value)
                   }
                 }
                 placeholder="Add a more detailed description"
@@ -95,7 +96,6 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
               <div className={activeItem === "desc" ?  styles.descritionController : styles.hide}>
                 <button className={styles.saveBtn}>Save</button>
                 <button onClick={()=>{
-                  console.log("1")
                   setActiveItem(state=>"none")
                 }} className={styles.closeXBtn}>
                   <span></span>

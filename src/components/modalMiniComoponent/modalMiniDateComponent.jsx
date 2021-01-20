@@ -1,13 +1,24 @@
 import Checkbox from "antd/lib/checkbox/Checkbox";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./modalMiniDateComponent.module.scss"
-
-export default function DateComponent({date}){
-  // const []
+import "./antd.css"
+export default function DateComponent({date,editInfo}){
+  const {checked,value} = date
   return(
     <div className={styles.date}>
       <h3>DUE DATE</h3>
-      <Checkbox onChange={()=>{}}/>
+      <div className={styles.dateBox}>
+        <Checkbox className={styles.Checkbox} onChange={()=>{
+          editInfo("complete",!checked);
+        }}/>
+        <div className={styles.testBox}>
+          <span>{value}</span>
+          {
+            checked?<span className={styles.complete}>complete</span>
+            :<span className={styles.overdue}>overdue</span>
+          }
+        </div>
+      </div>
     </div>
   )
 }
