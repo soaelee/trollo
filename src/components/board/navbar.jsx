@@ -44,18 +44,19 @@ const Input = styled.input`
 const TitleInput = styled.input`
 display: inline-block;
 background: transparent;
-border: 0;
+border: none;
 outline: 0;
 border-radius: 4px;
 &:focus {
   background-color: white;
   border: 1px solid skyblue;
   color: black;
+  transform: scaleX(1.1) scaleY(1.2);
 }
-font-size: ${ props => props.big ? '1.1rem' : '1rem' };
-font-weight: ${ props => props.big ? 'bolder': 'normal'};
-color: ${props => props.big ? 'white' : 'black'};
-width: ${props => props.big ? 'auto' : '80%'};
+font-size: 1.1rem;
+font-weight: bolder;
+color: white;
+width: auto;
 vertical-align: middle;
 `
 const Navbar = ({ title, members, auth }) => {
@@ -80,16 +81,15 @@ const Navbar = ({ title, members, auth }) => {
     setIsVisibleBg(false);
   };
 
-  const onChangeTitle = () => {
-
+  const onChangeTitle = (e) => {
+    if(e.key === "Enter")
+    e.target.blur();
   }
-  
-  // const TitleInput = 
 
   return (
     <Container>
       <Btn>
-        <Title onChange={onChangeTitle} title={title} big={true} />
+        <TitleInput onKeyDown={onChangeTitle} placeholder={title} />
       </Btn>
       <Members>
         {/* Avatar */}
