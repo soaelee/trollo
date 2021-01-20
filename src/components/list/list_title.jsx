@@ -61,8 +61,8 @@ return (
 // Prop Types
 ListTitle.propTypes = {
   title: PropTypes.string,
-  id: PropTypes.string,
-  likes: PropTypes.arrayof(PropTypes.number),
+  id: PropTypes.number,
+  likes: PropTypes.arrayOf(PropTypes.number),
 }
 
 export default ListTitle

@@ -113,8 +113,11 @@ const List = ({list, index}) => {
 
 // Prop Types
 List.propTypes = {
-  list: PropTypes.arrayof(propTypes.number),
+  list: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    cards: PropTypes.array,
+  }),
   index: PropTypes.number,
 }
-
 export default List
