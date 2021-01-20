@@ -15,7 +15,7 @@ const LayoutContainer = styled(Layout)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 10px;
   overflow-x: scroll;
   background-color: ${props => props.isColor ? props.bgColor : "#fff"};
 `
@@ -23,7 +23,7 @@ const LayoutContainer = styled(Layout)`
 const ContentContainer = styled(Content)`
   flex: 1;
   width: 100%;
-  margin-top: 70px;
+  margin-top: 52px;
   position: relative;
 `;
 
