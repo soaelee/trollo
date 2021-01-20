@@ -8,9 +8,13 @@ export default function DateComponent({date,editInfo}){
     <div className={styles.date}>
       <h3>DUE DATE</h3>
       <div className={styles.dateBox}>
-        <Checkbox className={styles.Checkbox} onChange={()=>{
-          editInfo("complete",!checked);
-        }}/>
+        <Checkbox 
+          className={styles.Checkbox}
+          checked={checked}
+          onChange={()=>{
+            editInfo("complete",!checked);
+          }}
+        />
         <div className={styles.testBox}>
           <span>{value}</span>
           {

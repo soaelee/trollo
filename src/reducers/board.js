@@ -69,6 +69,8 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+export const EDIT_COVER_REQUEST = "EDIT_COVER_REQUEST";
+
 export const EDIT_CARD_REQUEST = "EDIT_CARD_REQUEST";
 export const EDIT_CARD_SUCCESS = "EDIT_CARD_SUCCESS";
 export const EDIT_CARD_FAIL = "EDIT_CARD_FAIL";
@@ -103,6 +105,11 @@ export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
   type: EDIT_CARD_REQUEST,
   ClckedNum,
   editTarget,
+  data
+});
+export const editCoverAction = ({ClckedNum,data})=>({
+  type: EDIT_COVER_REQUEST,
+  ClckedNum,
   data
 });
 
@@ -145,6 +152,16 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListLoading = false;
       draft.addListError = action.error;
       break;
+    case EDIT_COVER_REQUEST:{
+      draft.board.lists.forEach(list=>{
+        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
+        if(selectedcard){
+          selectedcard.cover=action.data;
+          return
+        };
+      })
+      break;
+    }
     case REMOVE_LIST_REQUEST:
       draft.removeListLoading = true;
       draft.removeListDone = false;
