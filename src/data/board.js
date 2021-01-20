@@ -3,7 +3,7 @@ const boardDummyData = {
   name: 'trollers_clone',
   members: ['Back Seung Il', 'Han Seung Pyo', 'Lee So Ae'],
   auth: 'Back Seung Il',
-  like: [],
+  like: [null],
   lists: [
     {
       id: 1,

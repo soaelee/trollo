@@ -5,7 +5,7 @@ import ListTitle from './list_title';
 import CardContent from './card_content';
 import { Draggable } from 'react-beautiful-dnd';
 import CardDetailPage from '../../pages/cardDtail';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCardRequestAction } from '../../reducers/board';
 
 const ListContainer = styled(Card)`
@@ -44,6 +44,8 @@ const List = ({list, index}) => {
   const dispatch = useDispatch();
   const [isClcked,setIsClick] = useState(false);
   const [ClckedNum,setClickNum] = useState(null);
+  const likes = useSelector(state => state.user.user?.like);
+
   const resetClick = ()=>{
     setIsClick(()=>false)
     setClickNum(()=>null)
@@ -62,7 +64,7 @@ const List = ({list, index}) => {
       <Draggable draggableId={String(list.id)} index={parseInt(index)}> 
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <ListContainer title={<ListTitle title={list.title} id={list.id}/>}
+            <ListContainer title={<ListTitle title={list.title} id={list.id} likes={likes}/>}
               style={{position: 'relative'}}
               headStyle={{borderBottom: "0"}}
               bodyStyle={{padding: "10px"}}
