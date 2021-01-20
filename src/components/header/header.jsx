@@ -21,7 +21,7 @@ const Header = () => {
 
   const onLogout = () => {
     dispatch(logoutRequestAction());
-    history.push('/');
+    history.replace('/');
   };
 
   return (
