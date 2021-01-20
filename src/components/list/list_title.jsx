@@ -23,6 +23,13 @@ const PopOverPos = styled.div`
 
 const ListTitle = ({title, id, likes}) => {
   const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+
+  const likes = useSelector(state => state.user)
+  const likedBoards = likes.user.like
+  console.log(likedBoards)
+>>>>>>> a32d54f51c903ad97304afd93d9249075f9cfaa1
   const onClickLikeBtn = () => {
     if(likes.includes(id)){
       dispatch(unlikeListRequestAction(id))

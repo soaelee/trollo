@@ -71,7 +71,6 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
                 style={{
                   resize:'none',
                   boxShadow:activeItem==="title"?"1px blue":"0",
-                  border:0,
                   backgroundColor:activeItem==="desc"?"white":"rgba(9,30,66,.04)"
                 }}
                 value={clickedCardData.description?descData:""}
