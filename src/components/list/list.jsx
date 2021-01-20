@@ -14,7 +14,8 @@ const ListContainer = styled(Card)`
   border-radius: .2em;
   background-color: #e9e9e9;
   display: inline-block;
-  margin: .5em;
+  margin-top: 10px;
+  margin-right: 10px;
   position: relative;
 `
 
@@ -32,6 +33,7 @@ const AddCard = styled(Button)`
 const CardContainer = styled(Card)`
   margin-bottom: .5em;
   border-radius: 8px;
+  box-shadow: 0px 1px 1px 0px rgba(122, 122, 122, 1);
 `
 
 const CardCover = styled.div`
