@@ -200,6 +200,16 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.board.lists[action.data.srcIdx] = destination;
       break;
     }
+    case EDIT_CARD_REQUEST:{
+      draft.board.lists.forEach(list=>{
+        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
+        if(selectedcard){
+          selectedcard[action.editTarget]=action.data;
+          return
+        };
+      })
+      break
+    }
     default:
       break;
   }
