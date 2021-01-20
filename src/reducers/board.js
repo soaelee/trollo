@@ -69,15 +69,12 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
-<<<<<<< HEAD
 export const EDIT_CARD_REQUEST = "EDIT_CARD_REQUEST";
 export const EDIT_CARD_SUCCESS = "EDIT_CARD_SUCCESS";
 export const EDIT_CARD_FAIL = "EDIT_CARD_FAIL";
-=======
 export const INVITE_REQUEST = 'INVITE_REQUEST';
 export const INVITE_SUCCESS = 'INVITE_SUCCESS';
 export const INVITE_FAILURE = 'INVITE_FAILURE';
->>>>>>> 202fe89d7eb51bbee9d448692a118bd026e0f472
 
 export const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
 
@@ -196,24 +193,12 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       list.title = action.data.data;
       break;
     }
-<<<<<<< HEAD
-    case EDIT_CARD_REQUEST:{
-      draft.board.lists.forEach(list=>{
-        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
-        if(selectedcard){
-          selectedcard[action.editTarget]=action.data;
-          return
-        };
-      })
-      break
-=======
     case CHANGE_LIST_INDEX: {
       const destination = draft.board.lists[action.data.destIdx];
       const source = draft.board.lists[action.data.srcIdx];
       draft.board.lists[action.data.destIdx] = source;
       draft.board.lists[action.data.srcIdx] = destination;
       break;
->>>>>>> 202fe89d7eb51bbee9d448692a118bd026e0f472
     }
     default:
       break;
