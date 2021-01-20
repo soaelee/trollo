@@ -26,7 +26,6 @@ const ListTitle = ({title, id}) => {
   const dispatch = useDispatch();
 
   const likes = useSelector(state => state.user)
-  console.log(likes.user.like)
   const likedBoards = likes.user.like
   console.log(likedBoards)
   const onClickLikeBtn = () => {
