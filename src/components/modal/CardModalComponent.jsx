@@ -11,6 +11,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
   const [isEditing,setIsEditing] = useState(false);
   const [titleData,setTitleData] = useState(clickedCardData.title);
   const [descData,setDescData] = useState(clickedCardData.description?clickedCardData.description:"");
+  console.log(clickedCardData)
   return(
     <div className={styles.modalBox}>
       <section className={styles.modalSection}>
@@ -57,7 +58,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
             <div className={styles.cardInfo}>
               {clickedCardData.members && <ModalMiniComponent type="members" members={clickedCardData.members} datas={["B"]}/>}
               {clickedCardData.label && <ModalMiniComponent type="labels" labels={clickedCardData.label} datas={["yellow","red"]}/>}
-              {clickedCardData.date && <DateComponent date={clickedCardData.date}/>}
+              {clickedCardData.date && <DateComponent editInfo={editInfo} date={clickedCardData.date}/>}
             </div>
             <div className={styles.descrition}>
               <h3>
@@ -87,7 +88,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
                 onChange={e=>{
                     setDescData(()=>e.target.value);
                     console.log(descData)
-                    // editInfo("descrition",e.target.value)
+                    editInfo("description",e.target.value)
                   }
                 }
                 placeholder="Add a more detailed description"

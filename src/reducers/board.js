@@ -209,6 +209,16 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     }
     case EDIT_CARD_REQUEST:{
+      if(action.editTarget === "complete"){
+        draft.board.lists.forEach(list=>{
+          let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
+          if(selectedcard){
+            selectedcard["date"].checked=action.data;
+            return
+          };
+        })
+        return;
+      }
       draft.board.lists.forEach(list=>{
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
         if(selectedcard){
