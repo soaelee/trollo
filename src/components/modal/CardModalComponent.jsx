@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './CardModalComponent.module.scss'
 import { AlignLeftOutlined, CreditCardOutlined } from '@ant-design/icons';
 import "./CardModalComponent.css"
@@ -122,7 +122,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo,
             <section>
               <h3>SUGGESTED</h3>
               <div className={styles.optionBox}>
-                <button><span></span>join</button>
+                <button className={styles.optionBtn}><span></span>join</button>
               </div>
             </section>
             <section>

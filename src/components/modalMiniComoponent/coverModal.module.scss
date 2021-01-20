@@ -2,10 +2,10 @@
   background-color: rgb(255, 255, 255);
   position: absolute;
   top: 105px;
-  right: 15px;
-  border-radius: 5px;
+  right: 38px;
   border: 1px solid #000;
-
+  border-radius: 10px;
+  overflow: hidden;
   z-index: 10;
   h3{
     text-align: center;
@@ -60,7 +60,8 @@
   position: absolute;
   top: 140px;
   right: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  overflow: hidden;
   z-index: 10;
   h3{
     text-align: center;
