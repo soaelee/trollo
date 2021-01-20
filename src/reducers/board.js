@@ -73,6 +73,7 @@ export const INVITE_REQUEST = 'INVITE_REQUEST';
 export const INVITE_SUCCESS = 'INVITE_SUCCESS';
 export const INVITE_FAILURE = 'INVITE_FAILURE';
 
+export const CHANGE_LIST_INDEX = 'CHANGE_LIST_INDEX';
 
 export const addListRequestAction = () => ({
   type: ADD_LIST_REQUEST,
@@ -97,6 +98,12 @@ export const inviteRequestAction = (data) => ({
   type: INVITE_REQUEST,
   data,
 })
+
+export const changeListIndexAction = (data) => ({
+  type: CHANGE_LIST_INDEX,
+  data,
+})
+
 const getNewId = () => {
   const newId = moment().format('YYYYMMDDHHmmss');
   return parseInt(newId);
@@ -176,6 +183,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       const list = draft.board.lists.find(v => v.id === action.data.id);
       list.title = action.data.data;
       console.log(action.data.id);
+      break;
+    }
+    case CHANGE_LIST_INDEX: {
+      const destination = draft.board.lists[action.data.destIdx];
+      const source = draft.board.lists[action.data.srcIdx];
+      draft.board.lists[action.data.destIdx] = source;
+      draft.board.lists[action.data.srcIdx] = destination;
       break;
     }
     default:

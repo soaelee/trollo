@@ -6,7 +6,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'antd';
-import { addListRequestAction } from '../reducers/board';
+import { addListRequestAction, changeListIndexAction } from '../reducers/board';
+
 const AddListBtn = styled(Button)`
   position: relative;
   top: 10px;
@@ -15,15 +16,20 @@ const AddListBtn = styled(Button)`
   outline: 0;
   color: black;
 `;
+
 const Board = () => {
   
   const dispatch = useDispatch();
 
   const { board } = useSelector((state) => state.board);
 
-  const onDragEnd = useCallback(() => {
-    console.log('Completed DnD!');
-  }, []);
+  const onDragEnd = (result) => {
+    const body = {
+      destIdx: result.destination.index,
+      srcIdx: result.source.index,
+    }
+    dispatch(changeListIndexAction(body));
+  };
 
   const onClickAddList = useCallback(() => {
     dispatch(addListRequestAction());
@@ -36,8 +42,8 @@ const Board = () => {
           <Droppable droppableId={board.name} direction="horizontal">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef} style={{display: 'flex'}}>
-              {board.lists.map(v => (
-                <List key={v.id} list={v}/>
+              {board.lists.map((v, index) => (
+                <List key={v.id} list={v} index={index}/>
               ))}
               {provided.placeholder}
               <AddListBtn type="primary" onClick={onClickAddList}>+ Add List</AddListBtn>
