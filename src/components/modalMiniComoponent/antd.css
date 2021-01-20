@@ -1,0 +1,8 @@
+.ant-checkbox-inner{
+  width: 30px !important;
+  height: 30px !important;
+}
+.ant-checkbox-inner::after{
+  top: 48% !important;
+  left: 34% !important;
+}

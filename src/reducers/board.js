@@ -205,9 +205,10 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
         if(selectedcard){
           selectedcard[action.editTarget]=action.data;
+          console.log(selectedcard[action.editTarget])
           return
         };
-      })
+      });
       break
     }
     default:
