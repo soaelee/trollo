@@ -66,6 +66,9 @@ export const ADD_CARD_REQUEST = 'ADD_CARD_REQUEST';
 export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
+export const EDIT_CARD_REQUEST = "EDIT_CARD_REQUEST";
+export const EDIT_CARD_SUCCESS = "EDIT_CARD_SUCCESS";
+export const EDIT_CARD_FAIL = "EDIT_CARD_FAIL";
 
 
 
@@ -87,6 +90,13 @@ export const editListTitleAction = (data) => ({
   type: EDIT_LIST_TITLE_REQUEST,
   data,
 });
+
+export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
+  type: EDIT_CARD_REQUEST,
+  ClckedNum,
+  editTarget,
+  data
+})
 
 const getNewId = () => {
   const newId = moment().format('YYYYMMDDHHmmss');
@@ -149,8 +159,17 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
     case EDIT_LIST_TITLE_REQUEST: {
       const list = draft.board.lists.find(v => v.id === action.data.id);
       list.title = action.data.data;
-      console.log(action.data.id);
       break;
+    }
+    case EDIT_CARD_REQUEST:{
+      draft.board.lists.forEach(list=>{
+        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
+        if(selectedcard){
+          selectedcard[action.editTarget]=action.data;
+          return
+        };
+      })
+      break
     }
     default:
       break;
