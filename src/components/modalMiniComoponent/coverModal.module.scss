@@ -1,12 +1,110 @@
-.coverModalBox{
+.coverModalWrapper{
+  background-color: rgb(255, 255, 255);
   position: absolute;
-  background-color: rgb(231, 229, 229);
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  top: 105px;
+  right: 15px;
   border-radius: 5px;
-  button{
-    width: 45% !important;
+  border: 1px solid #000;
+
+  z-index: 10;
+  h3{
+    text-align: center;
+  }
+  .coverModalCloseBtn{
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+    right: 0;
+    width: 30px !important;
+    height: 30px !important;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    span{
+      display: inline-block;
+      width: 50%;
+      height: 1px;
+      transform: rotate(45deg);
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+    }
+    span:first-child{
+      transform: translate(-50%) rotate(135deg);
+    }
+  }
+  .coverModalBox{
+    background-color: inherit;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    button{
+      cursor: pointer;
+      width: 40%;
+      margin: 0 5% 10px;
+      height: 30px;
+      // margin-bottom: 10px;
+      border: 0;
+      border-radius: 5px;
+      &:hover{
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+  }
+}
+.topCoverModalWrapper{
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000;
+  position: absolute;
+  top: 140px;
+  right: 10px;
+  border-radius: 5px;
+  z-index: 10;
+  h3{
+    text-align: center;
+  }
+  .coverModalCloseBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px !important;
+    height: 30px !important;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border: none;
+    span{
+      display: inline-block;
+      width: 50%;
+      height: 1px;
+      transform: rotate(45deg);
+      background-color: #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+    }
+    span:first-child{
+      transform: translate(-50%) rotate(135deg);
+    }
+  }
+  .coverModalBox{
+    background-color: inherit;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    button{
+      cursor: pointer;
+      width: 40%;
+      margin: 0 5% 10px;
+      height: 30px;
+      border: 0;
+      border-radius: 5px;
+      &:hover{
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
   }
 }

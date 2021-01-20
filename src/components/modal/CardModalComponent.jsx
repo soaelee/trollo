@@ -7,14 +7,19 @@ import ModalMiniComponent from '../modalMiniComoponent/modalMiniComponent';
 import DateComponent from '../modalMiniComoponent/modalMiniDateComponent';
 import CoverModal from '../modalMiniComoponent/coverModalComponent';
 const { TextArea } = Input;
-export default function CardModalComponent({resetClick,clickedCardData,editInfo}){
+export default function CardModalComponent({resetClick,clickedCardData,editInfo,editCover}){
   const [activeItem,setActiveItem] = useState("none")
 
   const [titleData,setTitleData] = useState(clickedCardData.title);
   const [descData,setDescData] = useState(clickedCardData.description?clickedCardData.description:"");
   const [openCoverSelector,setOpenCoverSelector] = useState(false);
+  const [coverSelector,setCoverSelector] = useState(false);
+
   const openCoverModal = ()=>{
     setOpenCoverSelector(state=>!state);
+  }
+  const openCoverComponent = ()=>{
+    setCoverSelector(state=>!state);
   }
   return(
     <div className={styles.modalBox}>
@@ -24,10 +29,12 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
             <div></div>
             <div></div>
           </button>
-          {clickedCardData.cover && <div className={styles.cover} 
+          {clickedCardData.cover && 
+          <div className={styles.cover} 
             style={{backgroundColor:clickedCardData.cover?clickedCardData.cover:"inherit"}}
           >
-            <button className={styles.setCoverBtn}>cover</button>
+            <button className={styles.setCoverBtn} onClick={openCoverComponent}>cover</button>
+            {coverSelector && <CoverModal type="Top" openCoverModal={openCoverComponent} editCover={editCover} />}
           </div>}
           <h2>
             <div className={styles.titleIcon}>
@@ -121,11 +128,17 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
             <section>
               <h3>ADD TO CARD</h3>
               <div className={styles.optionBox}>
-                <button><span></span>Members</button>
-                <button><span></span>Labels</button>
-                {!clickedCardData.cover && <button onClick={openCoverModal}><span></span>cover</button>}
-                {<button><span></span>Due Date</button>}
-                {openCoverSelector && <CoverModal />}
+                <button className={styles.optionBtn}>
+                  <span></span>Members
+                </button>
+                <button className={styles.optionBtn}>
+                  <span></span>Labels
+                </button>
+                {!clickedCardData.cover && <button className={styles.optionBtn} onClick={openCoverModal}><span></span>cover</button>}
+                {<button className={styles.optionBtn}>
+                  <span></span>Due Date
+                  </button>}
+                {openCoverSelector && <CoverModal openCoverModal={openCoverModal} editCover={editCover} />}
               </div>
             </section>
             <section></section>
