@@ -59,7 +59,7 @@ const List = ({list, index}) => {
   };
   return (
     <>
-      <Draggable draggableId={list.title} index={parseInt(index)}> 
+      <Draggable draggableId={String(list.id)} index={parseInt(index)}> 
         {provided => (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <ListContainer title={<ListTitle title={list.title} id={list.id}/>}
