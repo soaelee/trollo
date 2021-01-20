@@ -1,0 +1,12 @@
+.coverModalBox{
+  position: absolute;
+  background-color: rgb(231, 229, 229);
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  button{
+    width: 45% !important;
+  }
+}

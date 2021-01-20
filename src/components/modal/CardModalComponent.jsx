@@ -5,25 +5,30 @@ import "./CardModalComponent.css"
 import { Input } from 'antd';
 import ModalMiniComponent from '../modalMiniComoponent/modalMiniComponent';
 import DateComponent from '../modalMiniComoponent/modalMiniDateComponent';
+import CoverModal from '../modalMiniComoponent/coverModalComponent';
 const { TextArea } = Input;
 export default function CardModalComponent({resetClick,clickedCardData,editInfo}){
   const [activeItem,setActiveItem] = useState("none")
-  const [isEditing,setIsEditing] = useState(false);
+
   const [titleData,setTitleData] = useState(clickedCardData.title);
   const [descData,setDescData] = useState(clickedCardData.description?clickedCardData.description:"");
-  console.log(clickedCardData)
+  const [openCoverSelector,setOpenCoverSelector] = useState(false);
+  const openCoverModal = ()=>{
+    setOpenCoverSelector(state=>!state);
+  }
   return(
     <div className={styles.modalBox}>
       <section className={styles.modalSection}>
         <header>
-          <div className={styles.cover} 
+          <button onClick={resetClick} className={styles.closeBtn}>
+            <div></div>
+            <div></div>
+          </button>
+          {clickedCardData.cover && <div className={styles.cover} 
             style={{backgroundColor:clickedCardData.cover?clickedCardData.cover:"inherit"}}
           >
-            <button onClick={resetClick} className={styles.closeBtn}>
-              <div></div>
-              <div></div>
-            </button>
-          </div>
+            <button className={styles.setCoverBtn}>cover</button>
+          </div>}
           <h2>
             <div className={styles.titleIcon}>
               <CreditCardOutlined/>
@@ -35,7 +40,10 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
                 resize:'none',
                 boxShadow:activeItem==="title"?"1px blue":"0",
                 backgroundColor:activeItem==="title"?"white":"transparent",
-                color:clickedCardData.title?"black":"gray"
+                color:clickedCardData.title?"black":"gray",
+                border:0,
+                fontSize:"1.5rem",
+                height:"3rem"
               }}
               onFocus={()=>{
                 setActiveItem(state=>"title");
@@ -78,7 +86,6 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
                 rows={4} 
                 onFocus={()=>{
                   setActiveItem(state=>"desc");
-                  setIsEditing(state=>!state);
                 }}
                 onBlur={
                   ()=>{
@@ -104,7 +111,25 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo}
               </div>
             </div>
           </div>
-          <div className={styles.selectorBox}></div>
+          <div className={styles.selectorBox}>
+            <section>
+              <h3>SUGGESTED</h3>
+              <div className={styles.optionBox}>
+                <button><span></span>join</button>
+              </div>
+            </section>
+            <section>
+              <h3>ADD TO CARD</h3>
+              <div className={styles.optionBox}>
+                <button><span></span>Members</button>
+                <button><span></span>Labels</button>
+                {!clickedCardData.cover && <button onClick={openCoverModal}><span></span>cover</button>}
+                {<button><span></span>Due Date</button>}
+                {openCoverSelector && <CoverModal />}
+              </div>
+            </section>
+            <section></section>
+          </div>
         </main>
       </section>
     </div>
