@@ -7,13 +7,15 @@ const useInput = (initialState, validator ) => {
     const { target: {value} } = e;
     
     let isPossible = true;
-
     if(typeof validator === 'function'){
-      isPossible = validator(value);
+      isPossible = validator(value).res;
     }
 
     if(isPossible) {
       setValue(value);
+    } else {
+      alert(validator(value).err);
+      return;
     }
   };
 
