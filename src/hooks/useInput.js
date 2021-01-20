@@ -9,11 +9,13 @@ const useInput = (initialState, validator ) => {
     let isPossible = true;
 
     if(typeof validator === 'function'){
-      isPossible = validator(value);
+      isPossible = validator(value).res;
     }
 
     if(isPossible) {
       setValue(value);
+    } else {
+      return alert(validator(value).err);
     }
   };
 
