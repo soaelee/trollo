@@ -174,7 +174,17 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.board.lists.forEach(list=>{
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
         if(selectedcard){
-          selectedcard.cover=action.data;
+          if(action.editTarget === "members"){
+            console.log(action.data)
+            selectedcard["members"] = selectedcard["members"].filter(member=>{
+              console.log(action.data,member)
+              return !(action.data===member)
+            });
+            return
+          }else if(action.editTarget === "labels"){
+            selectedcard["labels"]=selectedcard["labels"].filter(member=>!action.data===member);
+            return
+          }
           return
         };
       })
@@ -262,7 +272,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             }
           };
         })
-        return;
       break;
     }
     case CHANGE_BOARD_BACKGROUND:

@@ -8,7 +8,7 @@ import DateComponent from '../modalMiniComoponent/modalMiniDateComponent';
 import CoverModal from '../modalMiniComoponent/coverModalComponent';
 import AddModal from '../addModal/addModal';
 const { TextArea } = Input;
-export default function CardModalComponent({allMembers,resetClick,clickedCardData,editInfo,editCover}){
+export default function CardModalComponent({deleteInfo,allMembers,resetClick,clickedCardData,editInfo,editCover}){
   const [activeItem,setActiveItem] = useState("none")
 
   const [titleData,setTitleData] = useState(clickedCardData.title);
@@ -76,8 +76,8 @@ export default function CardModalComponent({allMembers,resetClick,clickedCardDat
         <main>
           <div className={styles.dataBox}>
             <div className={styles.cardInfo}>
-              {clickedCardData.members && <ModalMiniComponent editInfo={editInfo} allMembers={allMembers} type="members" members={clickedCardData.members}/>}
-              {clickedCardData.label && <ModalMiniComponent type="labels" labels={clickedCardData.label}/>}
+              {clickedCardData.members && <ModalMiniComponent deleteInfo={deleteInfo} editInfo={editInfo} allMembers={allMembers} type="members" members={clickedCardData.members}/>}
+              {clickedCardData.label && <ModalMiniComponent deleteInfo={deleteInfo}type="labels" labels={clickedCardData.label}/>}
               {clickedCardData.date && <DateComponent editInfo={editInfo} date={clickedCardData.date}/>}
             </div>
             <div className={styles.descrition}>
