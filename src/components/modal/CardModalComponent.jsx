@@ -6,13 +6,15 @@ import { Input } from 'antd';
 import ModalMiniComponent from '../modalMiniComoponent/modalMiniComponent';
 import DateComponent from '../modalMiniComoponent/modalMiniDateComponent';
 import CoverModal from '../modalMiniComoponent/coverModalComponent';
+import AddModal from '../addModal/addModal';
 const { TextArea } = Input;
-export default function CardModalComponent({resetClick,clickedCardData,editInfo,editCover}){
+export default function CardModalComponent({allMembers,resetClick,clickedCardData,editInfo,editCover}){
   const [activeItem,setActiveItem] = useState("none")
 
   const [titleData,setTitleData] = useState(clickedCardData.title);
   const [descData,setDescData] = useState(clickedCardData.description?clickedCardData.description:"");
   const [openCoverSelector,setOpenCoverSelector] = useState(false);
+  const [openMemberModal,setopenMemberModal] = useState(false);
   const [coverSelector,setCoverSelector] = useState(false);
 
   const openCoverModal = ()=>{
@@ -20,6 +22,9 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo,
   }
   const openCoverComponent = ()=>{
     setCoverSelector(state=>!state);
+  }
+  const openMemberComponent= ()=>{
+    setopenMemberModal(state=> !state)
   }
   return(
     <div className={styles.modalBox}>
@@ -71,8 +76,8 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo,
         <main>
           <div className={styles.dataBox}>
             <div className={styles.cardInfo}>
-              {clickedCardData.members && <ModalMiniComponent type="members" members={clickedCardData.members} datas={["B"]}/>}
-              {clickedCardData.label && <ModalMiniComponent type="labels" labels={clickedCardData.label} datas={["yellow","red"]}/>}
+              {clickedCardData.members && <ModalMiniComponent editInfo={editInfo} allMembers={allMembers} type="members" members={clickedCardData.members}/>}
+              {clickedCardData.label && <ModalMiniComponent type="labels" labels={clickedCardData.label}/>}
               {clickedCardData.date && <DateComponent editInfo={editInfo} date={clickedCardData.date}/>}
             </div>
             <div className={styles.descrition}>
@@ -128,7 +133,7 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo,
             <section>
               <h3>ADD TO CARD</h3>
               <div className={styles.optionBox}>
-                <button className={styles.optionBtn}>
+                <button className={styles.optionBtn} onClick={openMemberComponent}>
                   <span></span>Members
                 </button>
                 <button className={styles.optionBtn}>
@@ -139,6 +144,14 @@ export default function CardModalComponent({resetClick,clickedCardData,editInfo,
                   <span></span>Due Date
                   </button>}
                 {openCoverSelector && <CoverModal openCoverModal={openCoverModal} editCover={editCover} />}
+                {openMemberModal && 
+                  <AddModal 
+                    editInfo={editInfo} 
+                    type="members" 
+                    setOpenState={setopenMemberModal}
+                    datas={clickedCardData.members?allMembers.filter(member=>!clickedCardData.members.includes(member)):allMembers}
+                  />
+                }
               </div>
             </section>
             <section></section>
