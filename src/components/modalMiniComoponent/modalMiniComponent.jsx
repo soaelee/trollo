@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddModal from '../addModal/addModal';
 import styles from './modalMiniComponent.module.scss';
-export default function ModalMiniComponent({editInfo,allMembers,type,members,labels}){
+export default function ModalMiniComponent({deleteInfo,editInfo,allMembers,type,members,labels}){
   const [openModal,setOpenState] = useState(false);
   const [openModalType,setOpenTypeState] = useState("");
   const toggleModal = (type)=>{
@@ -9,19 +9,23 @@ export default function ModalMiniComponent({editInfo,allMembers,type,members,lab
     setOpenTypeState(state=>type);
     console.log(type,openModalType)
   }
+  const deleteInfoClick=(type,data)=>{
+    console.log("1")
+    deleteInfo(type,data)
+  }
   return (
     <div className={styles[type]}>
       <h3>{type}</h3>
       <div className={styles.innerBox}>
         {labels?
           labels.map(color=>(
-            <div className={styles.dataBox} key={color} style={{backgroundColor:color}}>
+            <button className={styles.dataBox} key={color} style={{backgroundColor:color}}>
               {color}
-            </div>)):
+            </button>)):
           members.map(member=>(
-            <div className={styles.dataBox} key={member}>
+            <button className={styles.dataBox} key={member} onClick={()=>{deleteInfoClick("members",member)}}>
               {member[0]}
-            </div>
+            </button>
           ))
         }
         {
