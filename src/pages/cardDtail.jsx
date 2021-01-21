@@ -6,9 +6,7 @@ import { editCardInfoAction, editCoverAction } from "../reducers/board";
 
 export default function CardDetailPage({resetClick,ClckedNum}){
   const cardData = useSelector(state=>state.board.board.lists);
-
-  // const setDescription = 
-
+  const allMembers = useSelector(state=>state.board.board.members);
   let clickedCardData;
   cardData.forEach(data=>{
     const clickedCard = data.cards.filter(card=>card.id===(+ClckedNum));
@@ -22,8 +20,9 @@ export default function CardDetailPage({resetClick,ClckedNum}){
   const editInfo = (editTarget,data)=>{
     dispatch(editCardInfoAction({ClckedNum,editTarget,data}))
   }
+
   const editCover = (data)=>{
     dispatch(editCoverAction({ClckedNum,data}))
   }
-  return ReactDOM.createPortal(<CardModalComponent editCover={editCover} editInfo={editInfo} clickedCardData={clickedCardData} resetClick={resetClick}/>,document.getElementById("cardModal"))
+  return ReactDOM.createPortal(<CardModalComponent allMembers={allMembers} editCover={editCover} editInfo={editInfo} clickedCardData={clickedCardData} resetClick={resetClick}/>,document.getElementById("cardModal"))
 }

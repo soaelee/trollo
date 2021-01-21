@@ -70,6 +70,7 @@ export const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS';
 export const ADD_CARD_FAILURE = 'ADD_CARD_FAILURE';
 
 export const EDIT_COVER_REQUEST = "EDIT_COVER_REQUEST";
+export const DELETE_CARD_REQUEST = "DELETE_CARD_REQUEST";
 
 export const EDIT_CARD_REQUEST = "EDIT_CARD_REQUEST";
 export const EDIT_CARD_SUCCESS = "EDIT_CARD_SUCCESS";
@@ -107,6 +108,13 @@ export const editCardInfoAction = ({ClckedNum,editTarget,data})=>({
   editTarget,
   data
 });
+export const deleteCardInfoAction = ({ClckedNum,editTarget,data})=>({
+  type: DELETE_CARD_REQUEST,
+  ClckedNum,
+  editTarget,
+  data
+});
+
 export const editCoverAction = ({ClckedNum,data})=>({
   type: EDIT_COVER_REQUEST,
   ClckedNum,
@@ -153,6 +161,16 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       draft.addListError = action.error;
       break;
     case EDIT_COVER_REQUEST:{
+      draft.board.lists.forEach(list=>{
+        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
+        if(selectedcard){
+          selectedcard.cover=action.data;
+          return
+        };
+      })
+      break;
+    }
+    case DELETE_CARD_REQUEST:{
       draft.board.lists.forEach(list=>{
         let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
         if(selectedcard){
@@ -228,23 +246,23 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
       break;
     }
     case EDIT_CARD_REQUEST:{
-      if(action.editTarget === "complete"){
         draft.board.lists.forEach(list=>{
           let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
           if(selectedcard){
-            selectedcard["date"].checked=action.data;
-            return
+            if(action.editTarget === "members"){
+              selectedcard["members"]?
+                selectedcard["members"].push(action.data):
+                [].push(action.data);
+              return
+            }else if(action.editTarget === "complete"){
+              selectedcard["date"].checked=action.data;
+              return
+            }else{
+              selectedcard[action.editTarget]=action.data;
+            }
           };
         })
         return;
-      }
-      draft.board.lists.forEach(list=>{
-        let selectedcard = list.cards.find(card=>+action.ClckedNum===card.id);
-        if(selectedcard){
-          selectedcard[action.editTarget]=action.data;
-          return
-        };
-      })
       break;
     }
     case CHANGE_BOARD_BACKGROUND:
